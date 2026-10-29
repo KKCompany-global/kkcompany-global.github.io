@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kkcompany-global.github.io/sitemap.xml
