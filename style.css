@@ -25,7 +25,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop
 @media (max-width:720px){.nav-links a{display:none}}
 
 /* hero */
-.hero{padding:96px 0 80px;background:radial-gradient(1200px 500px at 80% -10%,#dbe6ff 0,transparent 60%),radial-gradient(800px 400px at -10% 110%,#fff1d6 0,transparent 60%)}
+.hero{padding:96px 0 80px;background:radial-gradient(1200px 500px at 80% -10%,#cdd9ff 0,transparent 62%),radial-gradient(800px 400px at -10% 110%,#fff1d6 0,transparent 60%)}
 .eyebrow{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;color:var(--brand-2);background:#e8efff;padding:4px 12px;border-radius:999px;margin-bottom:20px}
 .hero h1{font-size:clamp(1.9rem,4.6vw,3.2rem);line-height:1.3;font-weight:800;letter-spacing:-.01em;margin-bottom:20px}
 .hero h1 .hl{background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -82,7 +82,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 a.app{color:inherit;transition:border-color .15s,transform .15s}
 a.app:hover{border-color:var(--brand-2);transform:translateY(-2px)}
 .more{display:inline-block;margin-top:12px;margin-left:8px;font-size:.82rem;font-weight:600;color:var(--brand-2)}
-.app-hero{padding:72px 0 64px;background:radial-gradient(1000px 420px at 85% -10%,#dbe6ff 0,transparent 60%)}
+.app-hero{padding:72px 0 64px;background:radial-gradient(1000px 420px at 85% -10%,#cdd9ff 0,transparent 62%)}
 .crumb{font-size:.85rem;color:var(--muted);margin-bottom:24px;display:block}
 .app-hero .head{display:flex;gap:20px;align-items:center;margin-bottom:22px}
 .app-hero .big-icon{width:80px;height:80px;border-radius:20px;display:grid;place-items:center;font-size:2.4rem;color:#fff;flex:0 0 80px}
@@ -107,11 +107,11 @@ a.app:hover{border-color:var(--brand-2);transform:translateY(-2px)}
 .hero::before,.app-hero::before{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(47,111,237,.10) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(47,111,237,.10) 1px,transparent 1px);
+    linear-gradient(rgba(47,111,237,.17) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(47,111,237,.17) 1px,transparent 1px);
   background-size:40px 40px;
-  -webkit-mask-image:linear-gradient(100deg,transparent 15%,#000 70%);
-          mask-image:linear-gradient(100deg,transparent 15%,#000 70%);
+  -webkit-mask-image:linear-gradient(100deg,transparent 5%,#000 60%);
+          mask-image:linear-gradient(100deg,transparent 5%,#000 60%);
 }
 /* floating shapes: circles, rotated squares, triangle, node network */
 .hero::after,.app-hero::after{
@@ -125,7 +125,7 @@ a.app:hover{border-color:var(--brand-2);transform:translateY(-2px)}
   .hero::after,.app-hero::after{width:340px;height:340px;right:-150px;opacity:.35}
 }
 /* faint dot pattern behind the mission section */
-#about{background-image:radial-gradient(rgba(31,58,138,.10) 1.2px,transparent 1.2px);background-size:22px 22px}
+#about{background-image:radial-gradient(rgba(31,58,138,.16) 1.2px,transparent 1.2px);background-size:22px 22px}
 /* angled lines on the contact card */
 .contact{position:relative;overflow:hidden}
 .contact>*{position:relative;z-index:1}
