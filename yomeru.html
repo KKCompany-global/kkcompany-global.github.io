@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=5">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Yomeru AI", "applicationCategory": "MobileApplication", "description": "役所や会社から届いた書類・手紙を撮影するだけで、何が書いてあるか、何をすればいいかをわかりやすく解説するアプリ。日本で暮らす外国人の方に。", "publisher": {"@type": "Organization", "name": "K&K Company"}}</script>
 </head>
 <body class="lang-ja" data-title-ja="Yomeru AI（ヨメル エーアイ）｜届いた書類・手紙を撮るだけでわかりやすく解説" data-title-en="Yomeru AI | Snap a letter, understand what it means">
@@ -39,38 +39,84 @@
         </div>
       </div>
       <p class="lead ja">「この手紙、何が書いてあるの？」「何かしないといけないの？」——役所や会社から届く書類は、慣れない言葉で書かれていて不安になりがちです。Yomeru AI は撮影するだけで、内容とやるべきことをわかりやすく伝えます。</p><p class="lead en">"What does this letter say? Do I need to do something?" Official mail is full of unfamiliar wording. With Yomeru AI, just take a photo and get a clear explanation of what it says and what to do.</p>
-      <span class="status"><span class="ja">開発中</span><span class="en">In development</span></span>
+      <div class="pills">
+        <span class="status"><span class="ja">開発中・実機テスト中</span><span class="en">In development · Testing on devices</span></span>
+        <span class="pill">iPhone</span>
+        <span class="pill"><span class="ja">説明は12言語</span><span class="en">Explains in 12 languages</span></span>
+        <span class="pill"><span class="ja">日本・アメリカの手紙</span><span class="en">Letters from Japan &amp; the US</span></span>
+      </div>
     </div>
   </div>
 
   <section>
     <div class="wrap">
+      <div class="sec-head"><span class="label">Screens</span><h2 class="ja">開発中の画面</h2><h2 class="en">Screens in development</h2></div>
+      <div class="shots shots4">
+        <figure><img src="img/yomeru-ai/screen-scan.jpg" alt="手紙の写真を入れた画面" loading="lazy" width="720" height="1472"><figcaption><span class="ja">手紙を撮るだけ</span><span class="en">Just snap the letter</span></figcaption></figure>
+        <figure><img src="img/yomeru-ai/screen-consent.jpg" alt="写真を送る前の同意画面" loading="lazy" width="720" height="1481"><figcaption><span class="ja">送る前に必ず確認</span><span class="en">Your consent first</span></figcaption></figure>
+        <figure><img src="img/yomeru-ai/screen-result.jpg" alt="手紙の説明の結果" loading="lazy" width="720" height="1472"><figcaption><span class="ja">何の手紙か、すぐわかる</span><span class="en">See what it is at once</span></figcaption></figure>
+        <figure><img src="img/yomeru-ai/screen-deadlines.jpg" alt="期限の一覧" loading="lazy" width="360" height="733"><figcaption><span class="ja">期限を一覧で管理</span><span class="en">Deadlines in one list</span></figcaption></figure>
+      </div>
+      <p class="note ja">※開発中の画面です。公開時には変わることがあります。個人の情報はぼかしています。</p>
+      <p class="note en">Screens are from a development build and may change before launch. Personal details are blurred.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">How it works</span><h2 class="ja">使い方は3ステップ</h2><h2 class="en">Three simple steps</h2></div>
+      <ol class="steps">
+        <li><b>1</b><h3 class="ja">手紙を撮る</h3><h3 class="en">Snap the letter</h3><p class="ja">手紙を平らに置いて、1ページずつ撮影します（4ページまで）。写真を選んだり、文字を貼り付けたりもできます。</p><p class="en">Lay the letter flat and take one photo per page (up to 4). You can also choose photos or paste the text.</p></li>
+        <li><b>2</b><h3 class="ja">説明の言語を選ぶ</h3><h3 class="en">Pick your language</h3><p class="ja">日本語、やさしい にほんご、英語、中国語、ベトナム語など12の言語から選べます。</p><p class="en">Choose from 12 languages, including Japanese, easy Japanese, English, Chinese and Vietnamese.</p></li>
+        <li><b>3</b><h3 class="ja">やることと期限を確認</h3><h3 class="en">See what to do and by when</h3><p class="ja">何の手紙か、対応が必要か、いつまでかを説明します。期限のある手紙は「期限」に追加できます。</p><p class="en">Get what the letter is, whether you must act, and by when. Letters with a due date can be added to Deadlines.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
       <div class="sec-head"><span class="label">Features</span><h2 class="ja">主な機能</h2><h2 class="en">Key features</h2></div>
-      <div class="feat">
-<div class="card"><div class="icon">📷</div><h3 class="ja">撮るだけで読み取り</h3><h3 class="en">Just take a photo</h3><p class="ja">書類をスマホで撮影するだけ。文字を打ち込む必要はありません。</p><p class="en">Snap the letter with your phone. No typing needed.</p></div>
-<div class="card"><div class="icon">💬</div><h3 class="ja">やさしい言葉で解説</h3><h3 class="en">Plain-language explanations</h3><p class="ja">専門用語や堅い言い回しを、わかりやすい言葉に置き換えて説明します。</p><p class="en">Jargon and formal wording are explained in simple words.</p></div>
-<div class="card"><div class="icon">✅</div><h3 class="ja">やるべきことがわかる</h3><h3 class="en">Know what to do next</h3><p class="ja">支払い・期限・提出物など、あなたが次にすべきことを整理します。</p><p class="en">Payments, deadlines and paperwork are pulled out as clear next steps.</p></div>
-<div class="card"><div class="icon">⚠️</div><h3 class="ja">大事な書類を見逃さない</h3><h3 class="en">Important mail gets extra care</h3><p class="ja">重要そうな書類や内容が不明確な書類は、より丁寧に読み直します。</p><p class="en">Important or unclear letters are read again more carefully.</p></div>
+      <div class="feat feat3">
+<div class="card"><div class="icon">💬</div><h3 class="ja">やさしい言葉で解説</h3><h3 class="en">Plain-language explanations</h3><p class="ja">専門用語や堅い言い回しを、わかりやすい言葉で説明します。手紙に出てくる大事な言葉の意味も一覧にします。</p><p class="en">Jargon and formal wording are explained in simple words, with a list of the key terms on the letter.</p></div>
+<div class="card"><div class="icon">🚦</div><h3 class="ja">急ぎかどうかが一目でわかる</h3><h3 class="en">Urgency at a glance</h3><p class="ja">「すぐに対応」「対応が必要」「お知らせ」「捨ててよい」の4段階で表示します。</p><p class="en">Each letter is marked Act now, Action needed, For your information or Safe to throw away.</p></div>
+<div class="card"><div class="icon">✅</div><h3 class="ja">やることを順番に</h3><h3 class="en">Clear next steps</h3><p class="ja">支払い・期限・提出物など、次にすべきことを順番に整理します。金額や支払い方法も確認できます。</p><p class="en">Payments, deadlines and paperwork become step-by-step actions, with the amount and how to pay.</p></div>
+<div class="card"><div class="icon">⏰</div><h3 class="ja">期限の通知</h3><h3 class="en">Deadline reminders</h3><p class="ja">保存した手紙は期限の近い順に並び、期限の1週間前と前日に通知でお知らせします。</p><p class="en">Saved letters are sorted by due date, with reminders a week before and the day before.</p></div>
+<div class="card"><div class="icon">⚠️</div><h3 class="ja">詐欺の注意</h3><h3 class="en">Scam warnings</h3><p class="ja">詐欺の疑いがある手紙には、赤い警告を表示します。</p><p class="en">Letters that may be scams get a red warning.</p></div>
+<div class="card"><div class="icon">🔍</div><h3 class="ja">大事な手紙は読み直し</h3><h3 class="en">Extra care for important mail</h3><p class="ja">税金・保険・在留資格など大事な手紙や、読み取りに自信がない手紙は、より丁寧に読み直します。</p><p class="en">Tax, insurance, residence-status and unclear letters are read again more carefully.</p></div>
       </div>
     </div>
   </section>
 
   <section class="alt">
     <div class="wrap">
+      <div class="sec-head"><span class="label">Privacy</span><h2 class="ja">安心して使えるように</h2><h2 class="en">Built with privacy in mind</h2></div>
+      <div class="feat feat3">
+<div class="card"><div class="icon">🤝</div><h3 class="ja">送る前に同意を確認</h3><h3 class="en">Consent before sending</h3><p class="ja">写真を初めて送る前に、どこに送られるかを説明し、同意をいただきます。</p><p class="en">Before your first photo is sent, the app explains where it goes and asks for your consent.</p></div>
+<div class="card"><div class="icon">🗑️</div><h3 class="ja">サーバーに保存しない</h3><h3 class="en">Not kept on our server</h3><p class="ja">写真はAI（Anthropic社のClaude）に説明させるためだけに使い、当方のサーバーには保存しません。</p><p class="en">Photos are used only to have the AI (Claude by Anthropic) explain them and are not kept on our server.</p></div>
+<div class="card"><div class="icon">📱</div><h3 class="ja">記録はスマホの中だけ</h3><h3 class="en">Records stay on your phone</h3><p class="ja">保存した手紙や設定はスマホの中にだけ残ります。アカウント登録も広告もありません。</p><p class="en">Saved letters and settings stay on your phone. No account and no ads.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
       <div class="sec-head"><span class="label">For you</span><h2 class="ja">こんな方におすすめ</h2><h2 class="en">Who it's for</h2></div>
       <ul class="who">
 <li><span class="ja">日本で暮らしていて、日本語の書類を読むのに苦労している外国人の方</span><span class="en">Foreign residents in Japan who struggle with Japanese paperwork</span></li>
-<li><span class="ja">海外で暮らしていて、現地の役所や会社からの郵便に戸惑う方</span><span class="en">People living abroad who find local official mail confusing</span></li>
+<li><span class="ja">アメリカで暮らしていて、役所や会社からの英語の郵便に戸惑う方</span><span class="en">People in the US who find official English mail confusing</span></li>
 <li><span class="ja">家族に届いた書類の内容を確認してあげたい方</span><span class="en">Anyone helping family members understand their mail</span></li>
       </ul>
     </div>
   </section>
 
-  <section>
+  <section class="alt">
     <div class="wrap faq">
       <div class="sec-head"><span class="label">FAQ</span><h2 class="ja">よくある質問</h2><h2 class="en">FAQ</h2></div>
-<details><summary><span class="ja">どんな書類に使えますか？</span><span class="en">What kinds of letters does it work with?</span></summary><p class="ja">役所・税金・保険・公共料金・会社からのお知らせなど、日常的に届く書類を想定しています。</p><p class="en">Everyday mail such as notices from city offices, tax, insurance, utilities and companies.</p></details>
-<details><summary><span class="ja">いつ使えるようになりますか？</span><span class="en">When will it be available?</span></summary><p class="ja">現在開発中です。公開時期はこのページでお知らせします。</p><p class="en">It is in development. We'll announce the release on this page.</p></details>
+<details><summary><span class="ja">どんな書類に使えますか？</span><span class="en">What kinds of letters does it work with?</span></summary><p class="ja">日本とアメリカで届く、役所・税金・保険・年金・公共料金・病院・会社からのお知らせなど、日常的な書類を想定しています。</p><p class="en">Everyday mail in Japan and the US, such as notices about tax, insurance, pensions, utilities and hospitals, and letters from city offices and companies.</p></details>
+<details open><summary><span class="ja">どの言語で説明してもらえますか？</span><span class="en">Which languages can it explain in?</span></summary><p class="ja">12の言語に対応しています：日本語、やさしい にほんご、英語、中国語（簡体字）、ベトナム語、韓国語、タガログ語、ポルトガル語、ネパール語、インドネシア語、ミャンマー語、スペイン語。</p><p class="en">12 languages: Japanese, easy Japanese, English, Chinese (Simplified), Vietnamese, Korean, Tagalog, Portuguese, Nepali, Indonesian, Burmese and Spanish.</p></details>
+<details><summary><span class="ja">写真はどこに送られますか？</span><span class="en">Where are my photos sent?</span></summary><p class="ja">説明を作るために、当方のサーバーを通って Anthropic 社のAI（Claude）に送られます。サーバーには保存しません。詳しくは<a href="yomeru-ai/privacy.html">プライバシーポリシー</a>をご覧ください。</p><p class="en">To create the explanation, they pass through our server to Anthropic's AI (Claude). Our server does not keep them. See the <a href="yomeru-ai/privacy.html">Privacy Policy</a>.</p></details>
+<details><summary><span class="ja">説明はいつも正しいですか？</span><span class="en">Are the explanations always right?</span></summary><p class="ja">AIの説明には誤りがあることがあります。法律・税務・在留資格の助言ではないため、最終的な確認は必ず手紙に書かれた窓口（役所など）で行ってください。</p><p class="en">AI explanations can contain mistakes. They are not legal, tax or immigration advice, so always confirm with the office named on the letter.</p></details>
+<details><summary><span class="ja">いつ使えるようになりますか？</span><span class="en">When will it be available?</span></summary><p class="ja">現在、実機でテスト中です。まず iPhone 向けに公開予定で、公開時期はこのページと X（旧Twitter）でお知らせします。</p><p class="en">We're testing on real devices now. It will launch on iPhone first; we'll announce the date on this page and on X.</p></details>
     </div>
   </section>
 
