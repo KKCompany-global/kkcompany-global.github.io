@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>アメリカ単位換算｜フィート・エーカー・ポンド・ガロンを日本の単位に（無料）</title>
-<meta name="description" content="フィート・ヤード・マイル、エーカー・平方フィート、オンス・ポンド、ガロン・カップ、mph、mpg、psi を、メートル・坪・グラム・リットルにまとめて換算。身近な例つきで感覚がつかめます。">
+<meta name="description" content="身長を「5フィート7インチ」、体重をポンドで。フィート・ヤード・マイル、エーカー・平方フィート、オンス・ポンド、ガロン・カップ、mph、mpg、psi を、メートル・坪・グラム・リットルにまとめて換算。身近な例つきで感覚がつかめます。">
 <meta property="og:title" content="アメリカ単位換算｜フィート・エーカー・ポンド・ガロンを日本の単位に（無料）">
 <meta property="og:description" content="フィート・ヤード・マイル、エーカー・平方フィート、オンス・ポンド、ガロン・カップ、mph、mpg、psi を、メートル・坪・グラム・リットルにまとめて換算。身近な例つきで感覚がつかめます。">
 <meta property="og:url" content="https://kkcompany-global.github.io/tani.html">
@@ -60,6 +60,7 @@
 .tool .res div.me{background:#eef3ff}
 .tool .res b{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:1.05rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .tool .res span{font-size:.82rem;color:var(--muted);white-space:nowrap}
+.tool .out .feel{font-family:"Inter",sans-serif;font-size:1.5rem;font-weight:800;color:var(--brand)}
 .tool .ex{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"アメリカ単位換算","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"フィート・ヤード・マイル、エーカー・平方フィート、オンス・ポンド、ガロン・カップ、mph、mpg、psi を、メートル・坪・グラム・リットルにまとめて換算。身近な例つきで感覚がつかめます。","publisher":{"@type":"Organization","name":"K&K Company"}}</script>
@@ -104,6 +105,28 @@
         <div class="res" id="res"></div>
         <ul class="ex" id="ex"></ul>
         <p class="note"><span class="ja">「米」はアメリカの単位です（イギリスのガロンやパイントは量が違います）。畳は 1.62 ㎡ で計算しています（地域によって 1.55〜1.82 ㎡ ほど差があります）。</span><span class="en">Volumes use US units (UK gallons and pints differ). Tatami uses 1.62 m², which varies by region.</span></p>
+      </section>
+      <section class="panel" aria-labelledby="hb">
+        <h2 id="hb"><span class="ja">身長・体重（アメリカの書き方）</span><span class="en">Height and weight, US style</span></h2>
+        <p class="note"><span class="ja">運転免許証や ID の申請では、身長を「5'-07&quot;」（5フィート7インチ）、体重をポンドで書きます。赤ちゃんの体重は「7 lb 8 oz」のようにポンドとオンスで言います。</span><span class="en">Driver's licenses and IDs list height as 5'-07&quot; (5 feet 7 inches) and weight in pounds. Babies' weights are given in pounds and ounces, like 7 lb 8 oz.</span></p>
+        <div class="grid2">
+          <div class="field" style="display:flex;flex-direction:column;gap:8px">
+            <label for="hCm"><span class="ja">身長（cm）</span><span class="en">Height (cm)</span></label><input type="text" id="hCm" inputmode="decimal" value="170" autocomplete="off">
+            <div class="inrow" style="grid-template-columns:1fr 1fr">
+              <div class="field"><label for="hFt"><span class="ja">フィート</span><span class="en">feet</span></label><input type="text" id="hFt" inputmode="numeric" autocomplete="off"></div>
+              <div class="field"><label for="hIn"><span class="ja">インチ</span><span class="en">inches</span></label><input type="text" id="hIn" inputmode="decimal" autocomplete="off"></div>
+            </div>
+            <div class="out" id="hOut" role="status"></div>
+          </div>
+          <div class="field" style="display:flex;flex-direction:column;gap:8px">
+            <label for="wKg"><span class="ja">体重（kg）</span><span class="en">Weight (kg)</span></label><input type="text" id="wKg" inputmode="decimal" value="65" autocomplete="off">
+            <div class="inrow" style="grid-template-columns:1fr 1fr">
+              <div class="field"><label for="wLb"><span class="ja">ポンド</span><span class="en">pounds</span></label><input type="text" id="wLb" inputmode="numeric" autocomplete="off"></div>
+              <div class="field"><label for="wOz"><span class="ja">オンス</span><span class="en">ounces</span></label><input type="text" id="wOz" inputmode="decimal" autocomplete="off"></div>
+            </div>
+            <div class="out" id="wOut" role="status"></div>
+          </div>
+        </div>
       </section>
       <p class="rel"><span class="ja">温度は <a href="ondo.html">華氏・摂氏換算</a>、ねじや分数インチは <a href="neji.html">インチ・ねじ早見帳</a> にあります。</span><span class="en">For temperature, see <a href="ondo.html">Fahrenheit ⇄ Celsius</a>. For screws and fractional inches, see the <a href="neji.html">Inch &amp; Thread Pocket Guide</a>.</span></p>
     </div>
@@ -164,6 +187,52 @@
   new MutationObserver(draw).observe(document.body, { attributes: true, attributeFilter: ["class"] });
   $("val").value = cat.dv; draw();
 })();
+</script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const en = () => document.body.className === "lang-en";
+  const n = (id) => { const v = String($(id).value).replace(/,/g, "").trim(); return v === "" || isNaN(Number(v)) ? null : Number(v); };
+  const p2 = (x) => String(x).padStart(2, "0");
+  const OZ = 0.028349523125;
+  function hFromCm() {
+    const cm = n("hCm"); if (cm == null) { $("hOut").textContent = ""; return; }
+    const tin = cm / 2.54; let ft = Math.floor(tin / 12), inch = Math.round(tin - ft * 12); if (inch === 12) { ft++; inch = 0; }
+    $("hFt").value = ft; $("hIn").value = inch; hShow(cm, ft, inch);
+  }
+  function hFromFt() {
+    const ft = n("hFt") || 0, inch = n("hIn") || 0, cm = (ft * 12 + inch) * 2.54;
+    $("hCm").value = String(Math.round(cm * 10) / 10); hShow(cm, ft, Math.round(inch));
+  }
+  function hShow(cm, ft, inch) {
+    const o = $("hOut"); o.textContent = "";
+    const a = document.createElement("div"); a.className = "feel"; a.textContent = ft + "'-" + p2(inch) + '"';
+    const b = document.createElement("div"); b.textContent = (en() ? ft + " ft " + inch + " in = " : ft + " フィート " + inch + " インチ = ") + Math.round(cm * 10) / 10 + " cm";
+    const c = document.createElement("div"); c.className = "note"; c.textContent = en() ? "As written on a US license: " + ft + "'-" + p2(inch) + '"' : "免許証・ID の書き方：" + ft + "'-" + p2(inch) + '"（' + ft + " フィート " + inch + " インチ）";
+    o.append(a, b, c);
+  }
+  function split(kg) { const tot = kg / OZ; let lb = Math.floor(tot / 16), oz = Math.round((tot - lb * 16) * 10) / 10; if (oz >= 16) { lb++; oz = 0; } return { lb, oz, exact: tot / 16 }; }
+  function wFromKg() {
+    const kg = n("wKg"); if (kg == null) { $("wOut").textContent = ""; return; }
+    const s = split(kg); $("wLb").value = s.lb; $("wOz").value = s.oz; wShow(kg);
+  }
+  function wFromLb() {
+    const lb = n("wLb") || 0, oz = n("wOz") || 0, kg = (lb * 16 + oz) * OZ;
+    $("wKg").value = String(Math.round(kg * 100) / 100); wShow(kg);
+  }
+  function wShow(kg) {
+    const s = split(kg), o = $("wOut"); o.textContent = "";
+    const a = document.createElement("div"); a.className = "feel"; a.textContent = Math.round(s.exact) + " lb";
+    const b = document.createElement("div"); b.textContent = s.lb + " lb " + s.oz + " oz = " + Math.round(kg * 100) / 100 + " kg";
+    const c = document.createElement("div"); c.className = "note"; c.textContent = en() ? "On a license, round to whole pounds: " + Math.round(s.exact) + " lb" : "免許証・ID には整数のポンドで：" + Math.round(s.exact) + " lb";
+    o.append(a, b, c);
+  }
+  $("hCm").addEventListener("input", hFromCm); $("hFt").addEventListener("input", hFromFt); $("hIn").addEventListener("input", hFromFt);
+  $("wKg").addEventListener("input", wFromKg); $("wLb").addEventListener("input", wFromLb); $("wOz").addEventListener("input", wFromLb);
+  new MutationObserver(() => { hFromFt(); wFromLb(); }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  hFromCm(); wFromKg();
+})();
+
 </script>
 </body>
 </html>
