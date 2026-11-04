@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google フォト書き出しの日付直し｜Takeout の撮影日を写真に戻す（無料）</title>
+<meta name="description" content="Google データエクスポート（Takeout）で書き出した写真の撮影日がずれる問題を、ブラウザだけで直します。JSON の撮影日を写真に書き戻し、年・月のフォルダに整理して ZIP で保存。写真はどこにも送りません。">
+<meta property="og:title" content="Google フォト書き出しの日付直し｜Takeout の撮影日を写真に戻す（無料）">
+<meta property="og:description" content="Google データエクスポート（Takeout）で書き出した写真の撮影日がずれる問題を、ブラウザだけで直します。JSON の撮影日を写真に書き戻し、年・月のフォルダに整理して ZIP で保存。写真はどこにも送りません。">
+<meta property="og:url" content="https://kkcompany-global.github.io/takeout.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<style>
+.tool{padding:40px 0 72px}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start;margin-bottom:20px}
+.tool .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0;margin-bottom:20px}
+.tool .grid2 .panel{margin-bottom:0}
+.tool h2{font-size:1.15rem;font-weight:800}
+.tool label{font-weight:600;font-size:.9rem}
+.tool input[type=text]{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+.tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tool .eq{color:var(--muted);padding-bottom:12px}
+@media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out b{font-weight:600;color:var(--brand)}
+.tool .out.err{background:#fff4e0}
+.tool .chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
+.tool .chip:hover{border-color:var(--brand-2)}
+.tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+.tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.tool td:first-child,.tool th:first-child{text-align:left}
+.tool td.name{font-weight:600;color:var(--brand)}
+.tool tr.hl td{background:#fff8eb}
+.tool tr.hit td{background:#e8efff}
+.tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tool .frac div.q{background:#fff8eb}
+.tool .frac div span:last-child{color:var(--muted)}
+.tool .note{font-size:.8rem;color:var(--muted);text-align:left}
+.tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
+.tool .drop{border:2px dashed var(--line);border-radius:var(--radius);padding:22px;text-align:center;color:var(--muted);background:var(--bg);display:flex;flex-direction:column;gap:10px;align-items:center}
+.tool .drop.on{border-color:var(--brand-2);background:#eef3ff}
+.tool .btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tool .tbtn{font:inherit;font-size:.9rem;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:42px}
+.tool .tbtn:hover{border-color:var(--brand-2)}
+.tool .tbtn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.tool .tbtn.pri:hover{background:var(--brand-2)}
+.tool .tbtn[aria-pressed="true"]{background:#eef3ff;border-color:var(--brand-2);color:var(--brand)}
+.tool select{font:inherit;font-size:.9rem;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;min-height:42px;background:var(--surface);color:var(--text)}
+.tool textarea{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;width:100%;min-height:90px;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;color:var(--text);background:var(--surface)}
+.tool .opts{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.9rem}
+.tool .opts label{font-weight:500;display:inline-flex;gap:6px;align-items:center}
+.tool .sheet th.xh,.tool .sheet td.xh{background:#f0f2f6;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:.75rem;text-align:center;min-width:36px}
+.tool .sheet tr.hd td:not(.xh){background:#eef3ff;font-weight:600;color:var(--brand)}
+.tool .sheet td{text-align:left;max-width:220px;overflow:hidden;text-overflow:ellipsis;font-size:.82rem}
+.tool .sheet .tw{max-height:420px}
+.tool .sum{font-size:.88rem;color:var(--muted)}
+.tool [hidden]{display:none!important}
+.tool .msg{font-size:.88rem;color:#a85f00;min-height:1.2em}
+
+.tool .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tool .stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tool .stat b{display:block;font-size:1.5rem;font-family:"Inter",sans-serif;font-variant-numeric:tabular-nums}
+.tool .stat span{font-size:.8rem;color:var(--muted)}
+.tool progress{width:100%;height:10px;accent-color:var(--brand-2)}
+.tool .miss{max-height:180px;overflow:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:0}
+.tool .how{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Google フォト書き出しの日付直し","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Google データエクスポート（Takeout）で書き出した写真の撮影日がずれる問題を、ブラウザだけで直します。JSON の撮影日を写真に書き戻し、年・月のフォルダに整理して ZIP で保存。写真はどこにも送りません。","publisher":{"@type":"Organization","name":"K&K Company"}}</script>
+</head>
+<body class="lang-ja" data-title-ja="Google フォト書き出しの日付直し｜Takeout の撮影日を写真に戻す（無料）" data-title-en="Google Photos Takeout Date Fixer | Put the taken dates back, free">
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <nav class="nav-links">
+      <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
+      <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
+      <a href="index.html#tools"><span class="ja">無料ツール</span><span class="en">Free tools</span></a>
+      <a href="index.html#contact"><span class="ja">お問い合わせ</span><span class="en">Contact</span></a>
+      <button class="lang-btn" id="langBtn" type="button">English</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="app-hero">
+    <div class="wrap">
+      <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
+      <div class="head">
+        <div class="big-icon" style="background:#0e7490">📅</div>
+        <div>
+          <h1><span class="ja">Google フォト書き出しの日付直し</span><span class="en">Google Photos Takeout Date Fixer</span></h1>
+          <div class="sub"><span class="ja">Takeout の撮影日を、写真に戻します</span><span class="en">Put the taken dates back on your photos</span></div>
+        </div>
+      </div>
+      <p class="lead ja">Google データエクスポート（Takeout）で写真を書き出すと、撮影日が別の JSON ファイルに分かれていて、パソコンに移すと日付がばらばらになります。このページは、JSON の撮影日を写真に戻して、年・月のフォルダに整理し直します。写真はブラウザの中だけで処理し、どこにも送りません。</p><p class="lead en">When you export from Google Photos with Takeout, the taken dates end up in separate JSON files, so the dates look wrong on your computer. This page puts the dates back on the photos and sorts them into year and month folders. Everything runs in your browser; nothing is uploaded.</p>
+    </div>
+  </div>
+  <div class="tool">
+    <div class="wrap">
+      <section class="panel" aria-labelledby="hh">
+        <h2 id="hh"><span class="ja">使い方</span><span class="en">How it works</span></h2>
+        <ol class="how">
+          <li><span class="ja"><a href="https://takeout.google.com/" target="_blank" rel="noopener">Google データエクスポート</a>で「Google フォト」だけを選んで書き出し、ZIP をダウンロードします</span><span class="en">Export only Google Photos from <a href="https://takeout.google.com/" target="_blank" rel="noopener">Google Takeout</a> and download the ZIP files</span></li>
+          <li><span class="ja">ZIP のまま、または解凍したフォルダを下で選びます</span><span class="en">Choose the ZIP files, or the unzipped folder, below</span></li>
+          <li><span class="ja">「直して保存」を押すと、撮影日付きの写真が ZIP でダウンロードされます。解凍すると、ファイルの日付が撮影日になっています</span><span class="en">Press Fix and save. Unzip the download and the file dates match when each photo was taken</span></li>
+        </ol>
+      </section>
+      <section class="panel" aria-labelledby="h1c">
+        <h2 id="h1c"><span class="ja">1. 書き出したファイルを選ぶ</span><span class="en">1. Choose your export</span></h2>
+        <div class="drop" id="drop">
+          <span><span class="ja">Takeout の ZIP（複数可）をここにドラッグ</span><span class="en">Drag your Takeout ZIP files here (several are fine)</span></span>
+          <div class="btnrow" style="justify-content:center">
+            <label class="tbtn pri" for="zipIn"><span class="ja">ZIP を選ぶ</span><span class="en">Choose ZIP files</span></label>
+            <label class="tbtn" for="dirIn"><span class="ja">解凍したフォルダを選ぶ</span><span class="en">Choose the unzipped folder</span></label>
+          </div>
+          <input type="file" id="zipIn" accept=".zip,application/zip" multiple hidden>
+          <input type="file" id="dirIn" webkitdirectory multiple hidden>
+          <span class="note"><span class="ja">写真がとても多い（数 GB 以上）ときは、ZIP を1つずつ処理するか、解凍したフォルダを選ぶ方が安定します</span><span class="en">For very large exports (several GB), process one ZIP at a time or choose the unzipped folder</span></span>
+        </div>
+        <p class="sum" id="stat" role="status"></p>
+        <p class="msg" id="msg" role="alert"></p>
+      </section>
+      <section class="panel" id="res" hidden aria-labelledby="h2c">
+        <h2 id="h2c"><span class="ja">2. 確かめて保存する</span><span class="en">2. Check and save</span></h2>
+        <div class="stats">
+          <div class="stat"><b id="nAll">0</b><span><span class="ja">写真・動画</span><span class="en">Photos and videos</span></span></div>
+          <div class="stat"><b id="nOk">0</b><span><span class="ja">撮影日が見つかった</span><span class="en">Taken date found</span></span></div>
+          <div class="stat"><b id="nMiss">0</b><span><span class="ja">撮影日が見つからない</span><span class="en">No date found</span></span></div>
+          <div class="stat"><b id="range" style="font-size:1.05rem;padding-top:.35rem">—</b><span><span class="ja">撮影時期</span><span class="en">Date range</span></span></div>
+        </div>
+        <div id="missBox" hidden>
+          <p class="note"><span class="ja">撮影日が見つからなかったファイル（JSON がない、または名前が対応しない）</span><span class="en">Files with no date (no JSON, or names that don't match)</span></p>
+          <pre class="miss" id="missList"></pre>
+        </div>
+        <div class="opts">
+          <label><input type="checkbox" id="optFolders" checked><span class="ja">年・月のフォルダに分ける</span><span class="en">Sort into year/month folders</span></label>
+          <label><input type="checkbox" id="optExif" checked><span class="ja">撮影日がない JPEG に撮影日を書き込む</span><span class="en">Write the taken date into JPEGs that lack one</span></label>
+          <label><input type="checkbox" id="optMissing" checked><span class="ja">撮影日が見つからないファイルも入れる</span><span class="en">Include files with no date</span></label>
+        </div>
+        <div class="btnrow"><button class="tbtn pri" type="button" id="goBtn"><span class="ja">直して保存</span><span class="en">Fix and save</span></button></div>
+        <progress id="prog" value="0" max="1"></progress>
+        <p class="note"><span class="ja">元のファイルは変更しません（新しい ZIP を作ります）。撮影日は、このパソコンの時間帯で書き込みます。JPEG 以外（HEIC・動画など）は中身を変えず、ファイルの日付だけを撮影日にします。</span><span class="en">Your original files are never changed; a new ZIP is made. Dates use this computer's time zone. For non-JPEG files (HEIC, video), the content is untouched and only the file date is set.</span></p>
+      </section>
+      <p class="rel"><span class="ja">写真を整理する前に、<a href="daijoubu.html">これやって大丈夫？（元に戻せる操作の早見表）</a>も確かめておくと安心です。</span><span class="en">Before tidying up, check <a href="daijoubu.html">Is it safe to do this?</a> to see which actions can be undone.</span></p>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> K&amp;K Company</span>
+    <span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">Designed in Japan for the world</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const en = () => document.body.className === "lang-en";
+  const tx = (ja, e) => en() ? e : ja;
+  const MEDIA = /\.(jpe?g|heic|heif|png|gif|webp|bmp|tiff?|dng|cr2|nef|arw|raw|mp4|mov|m4v|3gp|avi|mkv|webm|mts)$/i;
+  let items = [], missing = [], busy = false;
+
+  // ---------- reading the export ----------
+  async function collect(fileList) {
+    const out = [];
+    for (const f of fileList) {
+      if (/\.zip$/i.test(f.name)) {
+        if (!window.JSZip) throw new Error("zip");
+        const z = await JSZip.loadAsync(f);
+        z.forEach((path, e) => { if (!e.dir) out.push({ path, name: path.split("/").pop(), zip: e }); });
+      } else out.push({ path: f.webkitRelativePath || f.name, name: f.name, file: f });
+    }
+    return out;
+  }
+  const dirOf = (p) => p.includes("/") ? p.slice(0, p.lastIndexOf("/")) : "";
+  async function textOf(x) { return x.zip ? x.zip.async("string") : x.file.text(); }
+  async function bytesOf(x) { return x.zip ? x.zip.async("uint8array") : new Uint8Array(await x.file.arrayBuffer()); }
+
+  // Takeout names its sidecars IMG.jpg.json, IMG.jpg.supplemental-metadata.json, cut short when long,
+  // and puts a copy number in odd places: IMG(1).jpg ↔ IMG.jpg(1).json.
+  function sidecarKey(jsonName) {
+    let s = jsonName.replace(/\.json$/i, ""), n = "";
+    const m = /\((\d+)\)$/.exec(s); if (m) { n = m[1]; s = s.slice(0, -m[0].length); }
+    return { stem: s, n };
+  }
+  function mediaKey(name) {
+    let base = name, n = "";
+    const m = /^(.*)\((\d+)\)(\.[^.]+)$/.exec(name); if (m) { base = m[1] + m[3]; n = m[2]; }
+    base = base.replace(/-(edited|bearbeitet|modifié|編集済み)(\.[^.]+)$/i, "$2");
+    return { base, n };
+  }
+  function match(all) {
+    const jsons = {};
+    all.filter((x) => /\.json$/i.test(x.name)).forEach((x) => { const d = dirOf(x.path); (jsons[d] = jsons[d] || []).push({ x, ...sidecarKey(x.name) }); });
+    const media = all.filter((x) => MEDIA.test(x.name));
+    return media.map((m) => {
+      const k = mediaKey(m.name), list = jsons[dirOf(m.path)] || [];
+      const full = k.base + ".supplemental-metadata";
+      let best = null;
+      for (const j of list) {
+        if (j.n !== k.n || j.stem.length < 4) continue;
+        const ok = j.stem === k.base || full.startsWith(j.stem) || (k.base.startsWith(j.stem) && j.stem.length >= 40);
+        if (ok && (!best || j.stem.length > best.stem.length)) best = j;
+      }
+      return { m, j: best ? best.x : null };
+    });
+  }
+
+  // ---------- small EXIF helpers (JPEG only) ----------
+  function findExif(b) {
+    if (b[0] !== 0xFF || b[1] !== 0xD8) return { jpeg: false };
+    let i = 2;
+    while (i + 4 < b.length && b[i] === 0xFF) {
+      const mk = b[i + 1], len = (b[i + 2] << 8) | b[i + 3];
+      if (mk === 0xDA || mk === 0xD9) break;
+      if (mk === 0xE1 && b[i + 4] === 0x45 && b[i + 5] === 0x78 && b[i + 6] === 0x69 && b[i + 7] === 0x66) return { jpeg: true, at: i, hasDate: hasDateOriginal(b, i + 10, len - 8) };
+      i += 2 + len;
+    }
+    return { jpeg: true, at: -1, hasDate: false };
+  }
+  function hasDateOriginal(b, t, n) {
+    try {
+      const le = b[t] === 0x49;
+      const u16 = (o) => le ? b[t + o] | (b[t + o + 1] << 8) : (b[t + o] << 8) | b[t + o + 1];
+      const u32 = (o) => le ? (b[t + o] | (b[t + o + 1] << 8) | (b[t + o + 2] << 16)) + b[t + o + 3] * 16777216 : b[t + o] * 16777216 + ((b[t + o + 1] << 16) | (b[t + o + 2] << 8) | b[t + o + 3]);
+      const scan = (off, want) => { const c = u16(off); for (let k = 0; k < c; k++) { const e = off + 2 + k * 12; if (u16(e) === want) return u32(e + 8); } return 0; };
+      const ifd0 = u32(4); const exifPtr = scan(ifd0, 0x8769); if (!exifPtr) return false;
+      return !!scan(exifPtr, 0x9003);
+    } catch (e) { return false; }
+  }
+  // A minimal Exif block: DateTime in IFD0, DateTimeOriginal and DateTimeDigitized in the Exif IFD.
+  function exifBlock(dt) {
+    const s = new TextEncoder().encode(dt + "\0"); // 20 bytes
+    const tiff = [];
+    const w16 = (v) => tiff.push(v & 255, v >> 8), w32 = (v) => tiff.push(v & 255, (v >> 8) & 255, (v >> 16) & 255, (v >>> 24) & 255);
+    tiff.push(0x49, 0x49); w16(42); w32(8);
+    const ifd0 = 8, ifd0Len = 2 + 2 * 12 + 4, exifIfd = ifd0 + ifd0Len, exifLen = 2 + 2 * 12 + 4, data = exifIfd + exifLen;
+    w16(2); w16(0x0132); w16(2); w32(20); w32(data); w16(0x8769); w16(4); w32(1); w32(exifIfd); w32(0);
+    w16(2); w16(0x9003); w16(2); w32(20); w32(data + 20); w16(0x9004); w16(2); w32(20); w32(data + 40); w32(0);
+    for (let k = 0; k < 3; k++) s.forEach((c) => tiff.push(c));
+    const body = [0x45, 0x78, 0x69, 0x66, 0, 0, ...tiff], len = body.length + 2;
+    return new Uint8Array([0xFF, 0xE1, len >> 8, len & 255, ...body]);
+  }
+  function withDate(b, dt) {
+    const blk = exifBlock(dt), out = new Uint8Array(b.length + blk.length);
+    out.set(b.subarray(0, 2)); out.set(blk, 2); out.set(b.subarray(2), 2 + blk.length); return out;
+  }
+  const pad = (n) => String(n).padStart(2, "0");
+  const exifDate = (d) => d.getFullYear() + ":" + pad(d.getMonth() + 1) + ":" + pad(d.getDate()) + " " + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+
+  // ---------- run ----------
+  async function analyse(fileList) {
+    if (busy) return; busy = true; $("msg").textContent = ""; $("res").hidden = true;
+    try {
+      $("stat").textContent = tx("読み込み中…", "Reading…");
+      const all = await collect(fileList);
+      const pairs = match(all);
+      items = []; missing = [];
+      for (const p of pairs) {
+        let ts = null;
+        if (p.j) { try { const o = JSON.parse(await textOf(p.j)); const v = (o.photoTakenTime && o.photoTakenTime.timestamp) || (o.creationTime && o.creationTime.timestamp); if (v) ts = Number(v) * 1000; } catch (e) {} }
+        if (ts) items.push({ m: p.m, date: new Date(ts) }); else missing.push(p.m);
+      }
+      $("stat").textContent = "";
+      show();
+    } catch (e) {
+      $("stat").textContent = "";
+      $("msg").textContent = e && e.message === "zip" ? tx("ZIP を開く部品を読み込めませんでした。通信を確かめるか、ZIP を解凍してフォルダで選んでください。", "Couldn't load the ZIP reader. Check your connection, or unzip and choose the folder instead.") : tx("読み込めませんでした。Google データエクスポートの ZIP か、解凍したフォルダを選んでください。", "Couldn't read that. Choose the Takeout ZIP files or the unzipped folder.");
+    }
+    busy = false;
+  }
+  function show() {
+    $("res").hidden = false;
+    $("nAll").textContent = items.length + missing.length; $("nOk").textContent = items.length; $("nMiss").textContent = missing.length;
+    if (items.length) { const ds = items.map((x) => x.date.getTime()); const a = new Date(Math.min(...ds)), b = new Date(Math.max(...ds)); $("range").textContent = a.getFullYear() + "/" + (a.getMonth() + 1) + " – " + b.getFullYear() + "/" + (b.getMonth() + 1); } else $("range").textContent = "—";
+    const ml = $("missList"); ml.textContent = missing.slice(0, 300).map((m) => m.path).join("\n") + (missing.length > 300 ? "\n…" : "");
+    $("missBox").hidden = !missing.length;
+    $("goBtn").disabled = !items.length && !missing.length;
+  }
+  async function build() {
+    if (busy || !window.JSZip) { if (!window.JSZip) $("msg").textContent = tx("ZIP を作る部品を読み込めませんでした。通信を確かめてください。", "Couldn't load the ZIP writer. Check your connection."); return; }
+    busy = true; $("goBtn").disabled = true;
+    const byMonth = $("optFolders").checked, fixExif = $("optExif").checked, keepMissing = $("optMissing").checked;
+    const LIMIT = 1.5e9; // bytes per ZIP, so the browser doesn't run out of memory
+    const todo = [...items.map((x) => ({ ...x })), ...(keepMissing ? missing.map((m) => ({ m, date: null })) : [])];
+    let zip = new JSZip(), size = 0, part = 1, done = 0, written = 0;
+    const used = new Set();
+    const flush = async (last) => {
+      if (!size && !last) return;
+      $("stat").textContent = tx("ZIP を作っています…", "Building the ZIP…");
+      const blob = await zip.generateAsync({ type: "blob", compression: "STORE" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "photos_fixed" + (part > 1 || !last ? "_" + part : "") + ".zip"; document.body.append(a); a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+      zip = new JSZip(); size = 0; part++;
+    };
+    try {
+      for (const it of todo) {
+        let b = await bytesOf(it.m);
+        if (it.date && fixExif && /\.jpe?g$/i.test(it.m.name)) { const ex = findExif(b); if (ex.jpeg && ex.at < 0) { b = withDate(b, exifDate(it.date)); written++; } }
+        const folder = byMonth ? (it.date ? it.date.getFullYear() + "/" + pad(it.date.getMonth() + 1) : tx("撮影日不明", "unknown-date")) : "";
+        let name = it.m.name, path = (folder ? folder + "/" : "") + name, k = 1;
+        while (used.has(path.toLowerCase())) { const dot = name.lastIndexOf("."); path = (folder ? folder + "/" : "") + (dot > 0 ? name.slice(0, dot) + "_" + k + name.slice(dot) : name + "_" + k); k++; }
+        used.add(path.toLowerCase());
+        zip.file(path, b, it.date ? { date: it.date, binary: true } : { binary: true });
+        size += b.length; done++;
+        $("prog").value = done / todo.length; $("stat").textContent = tx(done + " / " + todo.length + " 枚", done + " / " + todo.length + " files");
+        if (size > LIMIT) await flush(false);
+      }
+      await flush(true);
+      $("stat").textContent = tx("できました。ダウンロードした ZIP を解凍してください。撮影日を書き込んだ JPEG：" + written + " 枚", "Done. Unzip the downloaded file. Taken dates written into JPEGs: " + written);
+    } catch (e) { $("msg").textContent = tx("途中で止まりました。枚数が多すぎる場合は、Takeout の ZIP を1つずつ処理してください。", "Stopped partway. If there are too many files, process the Takeout ZIPs one at a time."); }
+    busy = false; $("goBtn").disabled = false;
+  }
+
+  $("zipIn").addEventListener("change", (e) => { if (e.target.files.length) analyse([...e.target.files]); e.target.value = ""; });
+  $("dirIn").addEventListener("change", (e) => { if (e.target.files.length) analyse([...e.target.files]); e.target.value = ""; });
+  const drop = $("drop");
+  ["dragenter", "dragover"].forEach((k) => drop.addEventListener(k, (e) => { e.preventDefault(); drop.classList.add("on"); }));
+  ["dragleave", "drop"].forEach((k) => drop.addEventListener(k, (e) => { e.preventDefault(); drop.classList.remove("on"); }));
+  drop.addEventListener("drop", (e) => { const fs = [...e.dataTransfer.files]; if (fs.length) analyse(fs); });
+  $("goBtn").addEventListener("click", build);
+  window.__takeout = { match, mediaKey, sidecarKey, findExif, withDate, exifDate };
+})();
+</script>
+</body>
+</html>
