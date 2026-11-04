@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>インチ・ねじ早見帳｜インチ⇄ミリ換算・ねじの下穴早見表（無料）</title>
+<meta name="description" content="インチとミリ・センチの換算（分数対応）、メートルねじ・ユニファイねじ（UNC・UNF）の早見表と下穴径の目安。登録不要・無料で、ブラウザだけで使えます。">
+<meta property="og:title" content="インチ・ねじ早見帳｜インチ⇄ミリ換算・ねじの下穴早見表（無料）">
+<meta property="og:description" content="インチとミリ・センチの換算（分数対応）、メートルねじ・ユニファイねじ（UNC・UNF）の早見表と下穴径の目安。登録不要・無料で、ブラウザだけで使えます。">
+<meta property="og:url" content="https://kkcompany-global.github.io/neji.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<style>
+.tool{padding:40px 0 72px}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start;margin-bottom:20px}
+.tool .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0;margin-bottom:20px}
+.tool .grid2 .panel{margin-bottom:0}
+.tool h2{font-size:1.15rem;font-weight:800}
+.tool label{font-weight:600;font-size:.9rem}
+.tool input[type=text]{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+.tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tool .eq{color:var(--muted);padding-bottom:12px}
+@media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out b{font-weight:600;color:var(--brand)}
+.tool .out.err{background:#fff4e0}
+.tool .chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
+.tool .chip:hover{border-color:var(--brand-2)}
+.tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+.tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.tool td:first-child,.tool th:first-child{text-align:left}
+.tool td.name{font-weight:600;color:var(--brand)}
+.tool tr.hl td{background:#fff8eb}
+.tool tr.hit td{background:#e8efff}
+.tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tool .frac div.q{background:#fff8eb}
+.tool .frac div span:last-child{color:var(--muted)}
+.tool .note{font-size:.8rem;color:var(--muted);text-align:left}
+.tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"インチ・ねじ早見帳","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"インチとミリ・センチの換算（分数対応）、メートルねじ・ユニファイねじ（UNC・UNF）の早見表と下穴径の目安。登録不要・無料で、ブラウザだけで使えます。","publisher":{"@type":"Organization","name":"K&K Company"}}</script>
+</head>
+<body class="lang-ja" data-title-ja="インチ・ねじ早見帳｜インチ⇄ミリ換算・ねじの下穴早見表（無料）" data-title-en="Inch & Thread Pocket Guide | Free inch–mm converter and thread charts">
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <nav class="nav-links">
+      <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
+      <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
+      <a href="index.html#tools"><span class="ja">無料ツール</span><span class="en">Free tools</span></a>
+      <a href="index.html#contact"><span class="ja">お問い合わせ</span><span class="en">Contact</span></a>
+      <button class="lang-btn" id="langBtn" type="button">English</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="app-hero">
+    <div class="wrap">
+      <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
+      <div class="head">
+        <div class="big-icon" style="background:#334155">📏</div>
+        <div>
+          <h1><span class="ja">インチ・ねじ早見帳</span><span class="en">Inch &amp; Thread Pocket Guide</span></h1>
+          <div class="sub"><span class="ja">インチ⇄ミリ換算・ねじの早見表</span><span class="en">Inch–mm converter and thread charts</span></div>
+        </div>
+      </div>
+      <p class="lead ja">インチとミリ・センチの換算と、メートルねじ・ユニファイねじの早見表です。登録不要・無料。ブラウザの中だけで動き、入力した値はどこにも送りません。</p><p class="lead en">Convert inches to mm and cm, and look up metric and Unified threads. Free, no sign-up. It runs only in your browser and sends nothing anywhere.</p>
+    </div>
+  </div>
+
+  <div class="tool">
+    <div class="wrap">
+      <div class="grid2">
+        <section class="panel" aria-labelledby="h1c">
+          <h2 id="h1c"><span class="ja">インチ ⇄ ミリ換算</span><span class="en">Inch ⇄ mm</span></h2>
+          <div class="conv">
+            <div class="field"><label for="inIn"><span class="ja">インチ（分数も可）</span><span class="en">Inches (fractions OK)</span></label><input type="text" id="inIn" value="5/16" autocomplete="off"></div>
+            <span class="eq">=</span>
+            <div class="field"><label for="inMm"><span class="ja">ミリ</span><span class="en">Millimeters</span></label><input type="text" id="inMm" inputmode="decimal" value="" autocomplete="off"></div>
+          </div>
+          <div class="out" id="convOut" role="status"></div>
+          <p class="note"><span class="ja">例：1/4、1-1/2、1 3/8、0.375。ミリを入れると、いちばん近い 1/64 の分数も出します。</span><span class="en">Try 1/4, 1-1/2, 1 3/8 or 0.375. Enter mm to see the nearest 1/64 fraction.</span></p>
+        </section>
+        <section class="panel" aria-labelledby="h2c">
+          <h2 id="h2c"><span class="ja">ねじを調べる</span><span class="en">Look up a thread</span></h2>
+          <div class="field"><label for="thIn"><span class="ja">呼び径・ピッチ</span><span class="en">Size and pitch</span></label><input type="text" id="thIn" value="M6x1" autocomplete="off"></div>
+          <div class="chips" id="thChips"></div>
+          <div class="out" id="thOut" role="status"></div>
+          <p class="note"><span class="ja">下穴径は「外径 − ピッチ」の目安（ねじ山 約75%）です。正式な値はタップメーカーの表で確かめてください。</span><span class="en">Tap drill = major diameter − pitch (about 75% thread). Check your tap maker's chart for exact values.</span></p>
+        </section>
+      </div>
+
+      <section class="panel" aria-labelledby="h3c">
+        <h2 id="h3c"><span class="ja">分数インチ → ミリ（1/64 刻み）</span><span class="en">Fractional inches → mm (1/64 steps)</span></h2>
+        <div class="frac" id="fracGrid"></div>
+        <p class="note"><span class="ja">色付きは 1/16 刻み（よく使う寸法）です。</span><span class="en">Highlighted rows are 1/16 steps, the most common sizes.</span></p>
+      </section>
+
+      <section class="panel" aria-labelledby="h6c">
+        <h2 id="h6c"><span class="ja">インチ → センチ（1〜36 インチ）</span><span class="en">Inches → cm (1 to 36 in)</span></h2>
+        <div class="frac" id="wholeGrid"></div>
+        <p class="note"><span class="ja">色付きはフィート（12・24・36 インチ）です。1 フィート = 30.48 cm。</span><span class="en">Highlighted rows are whole feet (12, 24, 36 in). 1 ft = 30.48 cm.</span></p>
+      </section>
+
+      <div class="grid2">
+        <section class="panel" aria-labelledby="h4c">
+          <h2 id="h4c"><span class="ja">メートルねじ（並目・細目）</span><span class="en">Metric threads (coarse and fine)</span></h2>
+          <div class="tw"><table id="metTbl"></table></div>
+        </section>
+        <section class="panel" aria-labelledby="h5c">
+          <h2 id="h5c"><span class="ja">ユニファイねじ（UNC・UNF）</span><span class="en">Unified threads (UNC and UNF)</span></h2>
+          <div class="tw"><table id="uniTbl"></table></div>
+        </section>
+      </div>
+
+      <p class="rel"><span class="ja">製造業の現場向けに、台帳・伝票をかんたんに作れる業務データベース <a href="notans.html">ノータンスアプローチ2027</a> も開発しています。</span><span class="en">We are also building <a href="notans.html">Notans Approach 2027</a>, an easy business database for manufacturing ledgers and slips.</span></p>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> K&amp;K Company</span>
+    <span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">Designed in Japan for the world</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  const T = {
+    ja: {
+      title: "インチ・ねじ早見帳", lead: "インチとミリの換算、メートルねじ・ユニファイねじの早見表です。ブラウザの中だけで動き、入力した値はどこにも送りません。",
+      convH: "インチ ⇄ ミリ換算", inchLbl: "インチ（分数も可）", mmLbl: "ミリ", convNote: "例：1/4、1-1/2、1 3/8、0.375。ミリを入れると、いちばん近い 1/64 の分数も出します。",
+      lookH: "ねじを調べる", lookLbl: "呼び径・ピッチ", drillNote: "下穴径は「外径 − ピッチ」の目安（ねじ山 約75%）です。正式な値はタップメーカーの表で確かめてください。",
+      fracH: "分数インチ → ミリ（1/64 刻み）", fracNote: "色付きは 1/16 刻み（よく使う寸法）です。",
+      wholeH: "インチ → センチ（1〜36 インチ）", wholeNote: "色付きはフィート（12・24・36 インチ）です。1 フィート = 30.48 cm。", notSize: "規格表にない呼び径です",
+      metH: "メートルねじ（並目・細目）", uniH: "ユニファイねじ（UNC・UNF）",
+      foot: "K&K Company がつくっています。現場で使うちょっとした道具を、無料で置いています。",
+      size: "呼び", dia: "外径", pitch: "ピッチ", coarse: "並目", fine: "細目", drill: "下穴目安", tpi: "山数/in",
+      nearest: "近い分数", diff: "差", badInch: "インチの書き方が読めません（例：5/16、1-1/2、0.375）", badMm: "数字を入れてください",
+      badTh: "読めませんでした。M6、M8x1.25、1/4-20、#10-32 のように入れてください",
+      notStd: "規格表にないピッチです", kind: "種類", both: "並目と細目", metric: "メートルねじ", unified: "ユニファイねじ"
+    },
+    en: {
+      title: "Inch & Thread Pocket Guide", lead: "Inch–mm conversion and quick tables for metric and Unified threads. Runs only in your browser; nothing you type is sent anywhere.",
+      convH: "Inch ⇄ mm", inchLbl: "Inches (fractions OK)", mmLbl: "Millimeters", convNote: "Try 1/4, 1-1/2, 1 3/8 or 0.375. Enter mm to see the nearest 1/64 fraction.",
+      lookH: "Look up a thread", lookLbl: "Size and pitch", drillNote: "Tap drill = major diameter − pitch (about 75% thread). Check your tap maker's chart for exact values.",
+      fracH: "Fractional inches → mm (1/64 steps)", fracNote: "Highlighted rows are 1/16 steps, the most common sizes.",
+      wholeH: "Inches → cm (1 to 36 in)", wholeNote: "Highlighted rows are whole feet (12, 24, 36 in). 1 ft = 30.48 cm.", notSize: "Not a standard size",
+      metH: "Metric threads (coarse and fine)", uniH: "Unified threads (UNC and UNF)",
+      foot: "Made by K&K Company. Small, free tools for the shop floor.",
+      size: "Size", dia: "Major dia.", pitch: "Pitch", coarse: "Coarse", fine: "Fine", drill: "Tap drill", tpi: "TPI",
+      nearest: "Nearest fraction", diff: "off by", badInch: "Can't read that (try 5/16, 1-1/2 or 0.375)", badMm: "Enter a number",
+      badTh: "Can't read that. Try M6, M8x1.25, 1/4-20 or #10-32",
+      notStd: "Not a standard pitch for this size", kind: "Type", both: "coarse and fine", metric: "Metric", unified: "Unified"
+    }
+  };
+  let L = document.body.className === "lang-en" ? "en" : "ja";
+  const t = (k) => T[L][k];
+  const $ = (id) => document.getElementById(id);
+  const IN = 25.4;
+  const r = (x, n) => { const p = Math.pow(10, n); return (Math.round(x * p) / p).toFixed(n); };
+
+  // ---- data ----
+  const MET = [[1,0.25],[1.2,0.25],[1.4,0.3],[1.6,0.35],[2,0.4],[2.5,0.45],[3,0.5,[0.35]],[4,0.7,[0.5]],[5,0.8,[0.5]],[6,1,[0.75]],[8,1.25,[1]],[10,1.5,[1.25,1]],[12,1.75,[1.5,1.25]],[14,2,[1.5]],[16,2,[1.5]],[18,2.5,[1.5]],[20,2.5,[1.5]],[22,2.5,[1.5]],[24,3,[2]],[27,3,[2]],[30,3.5,[2]],[33,3.5,[2]],[36,4,[3]]];
+  const UNI = [["#0",0.060,null,80],["#1",0.073,64,72],["#2",0.086,56,64],["#3",0.099,48,56],["#4",0.112,40,48],["#5",0.125,40,44],["#6",0.138,32,40],["#8",0.164,32,36],["#10",0.190,24,32],["#12",0.216,24,28],["1/4",0.25,20,28],["5/16",0.3125,18,24],["3/8",0.375,16,24],["7/16",0.4375,14,20],["1/2",0.5,13,20],["9/16",0.5625,12,18],["5/8",0.625,11,18],["3/4",0.75,10,16],["7/8",0.875,9,14],["1",1.0,8,12]];
+
+  // ---- fractions ----
+  function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+  function fracText(n64) {
+    const whole = Math.floor(n64 / 64), rem = n64 % 64;
+    if (!rem) return String(whole);
+    const g = gcd(rem, 64), f = (rem / g) + "/" + (64 / g);
+    return whole ? whole + "-" + f : f;
+  }
+  function parseInch(s) {
+    s = String(s).trim().replace(/[″"]|in(ch(es)?)?$/gi, "").trim();
+    if (!s) return null;
+    let m = /^(\d+)\s*[- ]\s*(\d+)\s*\/\s*(\d+)$/.exec(s);
+    if (m && +m[3]) return +m[1] + (+m[2]) / (+m[3]);
+    m = /^(\d+)\s*\/\s*(\d+)$/.exec(s);
+    if (m && +m[2]) return (+m[1]) / (+m[2]);
+    m = /^\d*\.?\d+$/.exec(s);
+    if (m) return parseFloat(s);
+    return null;
+  }
+
+  // ---- converter ----
+  let lastSide = "in";
+  function showConv() {
+    const out = $("convOut"); out.className = "out"; out.textContent = "";
+    const line = (a, b) => { const d = document.createElement("div"); d.innerHTML = ""; const x = document.createElement("span"); x.textContent = a + " "; const y = document.createElement("b"); y.textContent = b; d.append(x, y); out.append(d); };
+    if (lastSide === "in") {
+      const v = parseInch($("inIn").value);
+      if (v == null) { if ($("inIn").value.trim()) { out.className = "out err"; out.textContent = t("badInch"); } $("inMm").value = ""; return; }
+      const mm = v * IN; $("inMm").value = r(mm, 3);
+      line(r(v, 4) + " in =", r(mm, 3) + " mm");
+      line("", r(mm / 10, 4) + " cm");
+    } else {
+      const raw = $("inMm").value.trim().replace(/mm$/i, "").trim();
+      const mm = parseFloat(raw);
+      if (!raw || isNaN(mm)) { if (raw) { out.className = "out err"; out.textContent = t("badMm"); } $("inIn").value = ""; return; }
+      const inch = mm / IN; $("inIn").value = r(inch, 4);
+      const n64 = Math.round(inch * 64);
+      line(r(mm, 3) + " mm =", r(inch, 4) + " in");
+      line(t("nearest") + ":", fracText(n64) + "\" (" + r(n64 / 64 * IN, 3) + " mm, " + t("diff") + " " + r(Math.abs(n64 / 64 * IN - mm), 3) + " mm)");
+    }
+    hilite();
+  }
+  $("inIn").addEventListener("input", () => { lastSide = "in"; showConv(); });
+  $("inMm").addEventListener("input", () => { lastSide = "mm"; showConv(); });
+
+  // ---- fraction grid ----
+  function drawFrac() {
+    const g = $("fracGrid"); g.textContent = "";
+    for (let n = 1; n <= 64; n++) {
+      const d = document.createElement("div"); if (n % 4 === 0) d.className = "q"; d.dataset.n = n;
+      const a = document.createElement("span"); a.textContent = fracText(n) + "\"";
+      const b = document.createElement("span"); b.textContent = r(n / 64 * IN, 3);
+      d.append(a, b); g.append(d);
+    }
+  }
+  function drawWhole() {
+    const g = $("wholeGrid"); g.textContent = "";
+    for (let n = 1; n <= 36; n++) {
+      const d = document.createElement("div"); if (n % 12 === 0) d.className = "q";
+      const a = document.createElement("span"); a.textContent = n + "\"" + (n % 12 === 0 ? " (" + n / 12 + " ft)" : "");
+      const b = document.createElement("span"); b.textContent = r(n * 2.54, 2) + " cm";
+      d.append(a, b); g.append(d);
+    }
+  }
+  function hilite() {
+    const v = parseInch($("inIn").value);
+    document.querySelectorAll("#fracGrid div").forEach((d) => { d.style.outline = ""; });
+    if (v == null || v <= 0 || v > 1) return;
+    const n = Math.round(v * 64);
+    const el = document.querySelector('#fracGrid div[data-n="' + n + '"]');
+    if (el) el.style.outline = "2px solid var(--accent)";
+  }
+
+  // ---- tables ----
+  function cell(tag, txt, cls) { const c = document.createElement(tag); c.textContent = txt; if (cls) c.className = cls; return c; }
+  function drawTables() {
+    const m = $("metTbl"); m.textContent = "";
+    const mh = document.createElement("thead"); const mr = document.createElement("tr");
+    [t("size"), t("pitch") + " (" + t("coarse") + ")", t("drill"), t("pitch") + " (" + t("fine") + ")", t("dia") + " in"].forEach((x) => mr.append(cell("th", x))); mh.append(mr); m.append(mh);
+    const mb = document.createElement("tbody");
+    MET.forEach(([d, p, f]) => {
+      const tr = document.createElement("tr"); tr.dataset.k = "M" + d; if ([3,4,5,6,8,10,12].includes(d)) tr.className = "hl";
+      tr.append(cell("td", "M" + d, "name"), cell("td", p), cell("td", r(d - p, 2)), cell("td", f ? f.join(" / ") : "—"), cell("td", r(d / IN, 4)));
+      mb.append(tr);
+    }); m.append(mb);
+    const u = $("uniTbl"); u.textContent = "";
+    const uh = document.createElement("thead"); const ur = document.createElement("tr");
+    [t("size"), t("dia") + " in", t("dia") + " mm", "UNC", "UNF"].forEach((x) => ur.append(cell("th", x))); uh.append(ur); u.append(uh);
+    const ub = document.createElement("tbody");
+    UNI.forEach(([n, d, c, f]) => {
+      const tr = document.createElement("tr"); tr.dataset.k = n; if (["1/4","5/16","3/8","1/2","#10"].includes(n)) tr.className = "hl";
+      tr.append(cell("td", n, "name"), cell("td", d.toFixed(4)), cell("td", r(d * IN, 2)), cell("td", c ? c : "—"), cell("td", f));
+      ub.append(tr);
+    }); u.append(ub);
+  }
+
+  // ---- thread lookup ----
+  const CHIPS = ["M3", "M6x1", "M8x1.25", "M10x1.25", "1/4-20", "3/8-24", "#10-32", "1/2"];
+  function drawChips() {
+    const c = $("thChips"); c.textContent = "";
+    CHIPS.forEach((x) => { const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = x; b.addEventListener("click", () => { $("thIn").value = x; lookup(); }); c.append(b); });
+  }
+  function lookup() {
+    const out = $("thOut"); out.className = "out"; out.textContent = "";
+    document.querySelectorAll("tr.hit").forEach((x) => x.classList.remove("hit"));
+    const s = $("thIn").value.trim().replace(/[×*]/g, "x").replace(/\s+/g, "");
+    if (!s) return;
+    const add = (a, b) => { const d = document.createElement("div"); const x = document.createElement("span"); x.textContent = a + "  "; const y = document.createElement("b"); y.textContent = b; d.append(x, y); out.append(d); };
+    let m = /^m(\d+(?:\.\d+)?)(?:x(\d+(?:\.\d+)?))?$/i.exec(s);
+    if (m) {
+      const d = +m[1], row = MET.find((x) => x[0] === d);
+      const p = m[2] ? +m[2] : row ? row[1] : null;
+      add(t("kind") + ":", t("metric") + " M" + d + (p ? " × " + p : ""));
+      add(t("dia") + ":", r(d, 2) + " mm = " + r(d / IN, 4) + " in");
+      if (p) {
+        add(t("pitch") + ":", p + " mm  (" + r(IN / p, 1) + " " + t("tpi") + ")");
+        add(t("drill") + ":", r(d - p, 2) + " mm  (" + r((d - p) / IN, 4) + " in)");
+        if (row && p !== row[1] && !(row[2] || []).includes(p)) add("", t("notStd"));
+        else if (row) add("", p === row[1] ? t("coarse") : t("fine"));
+        else add("", t("notSize"));
+      }
+      if (row) { const tr = document.querySelector('#metTbl tr[data-k="M' + d + '"]'); if (tr) tr.classList.add("hit"); }
+      return;
+    }
+    m = /^(#\d+|\d+-\d+\/\d+|\d+\/\d+|\d+(?:\.\d+)?)(?:-(\d+))?$/.exec(s);
+    if (m) {
+      let name = m[1], row = UNI.find((x) => x[0] === name), d;
+      if (row) d = row[1];
+      else if (name[0] !== "#") { d = parseInch(name); if (d != null) row = UNI.find((x) => Math.abs(x[1] - d) < 1e-6); if (row) name = row[0]; }
+      if (d == null) { out.className = "out err"; out.textContent = t("badTh"); return; }
+      const tpi = m[2] ? +m[2] : null;
+      add(t("kind") + ":", t("unified") + " " + name + (tpi ? "-" + tpi : row ? " (" + t("both") + ")" : ""));
+      add(t("dia") + ":", d.toFixed(4) + " in = " + r(d * IN, 2) + " mm");
+      const one = (n, label) => {
+        const p = IN / n;
+        add((label ? label + " " : "") + t("pitch") + ":", n + " " + t("tpi") + "  (" + r(p, 3) + " mm)");
+        add(t("drill") + ":", r(d - 1 / n, 4) + " in  (" + r(d * IN - p, 2) + " mm)");
+      };
+      if (tpi) { one(tpi, row ? (tpi === row[2] ? "UNC" : tpi === row[3] ? "UNF" : "") : ""); if (row && tpi !== row[2] && tpi !== row[3]) add("", t("notStd")); }
+      else if (row) { if (row[2]) one(row[2], "UNC"); one(row[3], "UNF"); }
+      if (row) { const tr = document.querySelector('#uniTbl tr[data-k="' + row[0] + '"]'); if (tr) tr.classList.add("hit"); }
+      return;
+    }
+    out.className = "out err"; out.textContent = t("badTh");
+  }
+  $("thIn").addEventListener("input", lookup);
+
+  // ---- language: follows the site's English / 日本語 button ----
+  function applyLang() { L = document.body.className === "lang-en" ? "en" : "ja"; drawTables(); drawWhole(); showConv(); lookup(); }
+  new MutationObserver(applyLang).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  drawFrac(); drawChips(); applyLang();
+})();
+</script>
+</body>
+</html>
