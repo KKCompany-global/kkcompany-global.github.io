@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>華氏・摂氏換算｜°F と °C をすぐ変換・早見表つき（無料）</title>
+<meta name="description" content="華氏（°F）と摂氏（°C）を入力するだけで換算。天気・体温・料理（オーブン）の温度の早見表つき。アメリカの天気予報やレシピ、体温計の数字がすぐわかります。">
+<meta property="og:title" content="華氏・摂氏換算｜°F と °C をすぐ変換・早見表つき（無料）">
+<meta property="og:description" content="華氏（°F）と摂氏（°C）を入力するだけで換算。天気・体温・料理（オーブン）の温度の早見表つき。アメリカの天気予報やレシピ、体温計の数字がすぐわかります。">
+<meta property="og:url" content="https://kkcompany-global.github.io/ondo.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<style>
+.tool{padding:40px 0 72px}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start;margin-bottom:20px}
+.tool .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0;margin-bottom:20px}
+.tool .grid2 .panel{margin-bottom:0}
+.tool h2{font-size:1.15rem;font-weight:800}
+.tool label{font-weight:600;font-size:.9rem}
+.tool input[type=text]{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+.tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tool .eq{color:var(--muted);padding-bottom:12px}
+@media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out b{font-weight:600;color:var(--brand)}
+.tool .out.err{background:#fff4e0}
+.tool .chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
+.tool .chip:hover{border-color:var(--brand-2)}
+.tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+.tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.tool td:first-child,.tool th:first-child{text-align:left}
+.tool td.name{font-weight:600;color:var(--brand)}
+.tool tr.hl td{background:#fff8eb}
+.tool tr.hit td{background:#e8efff}
+.tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tool .frac div.q{background:#fff8eb}
+.tool .frac div span:last-child{color:var(--muted)}
+.tool .note{font-size:.8rem;color:var(--muted);text-align:left}
+.tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
+
+.tool .big{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end}
+.tool .big input[type=text]{font-size:2rem;min-height:64px;text-align:right}
+.tool .unit{font-family:"Inter",sans-serif;font-weight:800;color:var(--muted);font-size:1.1rem}
+.tool .swap{font-size:1.4rem;color:var(--muted);padding-bottom:16px}
+@media (max-width:520px){.tool .big{grid-template-columns:1fr}.tool .swap{display:none}}
+.tool .feel{font-size:1rem;font-weight:600;color:var(--brand)}
+.tool .scale{position:relative;height:14px;border-radius:999px;background:linear-gradient(90deg,#4f7cc9,#7fb7d9 30%,#9ccf8f 52%,#f0c15a 72%,#e0663f);margin-top:4px}
+.tool .scale i{position:absolute;top:-5px;width:4px;height:24px;border-radius:2px;background:var(--text);transform:translateX(-2px)}
+.tool .scale-l{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+.tool .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start}
+.tool .grid3 .panel{margin-bottom:0}
+.tool td.lbl{font-family:inherit;text-align:left;color:var(--muted);font-size:.82rem;white-space:normal}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"華氏・摂氏換算","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"華氏（°F）と摂氏（°C）を入力するだけで換算。天気・体温・料理（オーブン）の温度の早見表つき。アメリカの天気予報やレシピ、体温計の数字がすぐわかります。","publisher":{"@type":"Organization","name":"K&K Company"}}</script>
+</head>
+<body class="lang-ja" data-title-ja="華氏・摂氏換算｜°F と °C をすぐ変換・早見表つき（無料）" data-title-en="Fahrenheit to Celsius | Quick °F ⇄ °C converter and charts">
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <nav class="nav-links">
+      <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
+      <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
+      <a href="index.html#tools"><span class="ja">無料ツール</span><span class="en">Free tools</span></a>
+      <a href="index.html#contact"><span class="ja">お問い合わせ</span><span class="en">Contact</span></a>
+      <button class="lang-btn" id="langBtn" type="button">English</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="app-hero">
+    <div class="wrap">
+      <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
+      <div class="head">
+        <div class="big-icon" style="background:#b91c1c">🌡️</div>
+        <div>
+          <h1><span class="ja">華氏・摂氏換算</span><span class="en">Fahrenheit ⇄ Celsius</span></h1>
+          <div class="sub"><span class="ja">°F と °C をすぐ変換、天気・体温・オーブンの早見表つき</span><span class="en">Instant °F ⇄ °C with weather, body and oven charts</span></div>
+        </div>
+      </div>
+      <p class="lead ja">アメリカの天気予報、体温計、レシピのオーブン温度は華氏（°F）で書かれています。数字を入れるだけで摂氏（°C）に直します。表の行を押すと、その温度を換算欄に入れます。</p><p class="lead en">US weather, thermometers and recipes use Fahrenheit. Type a number to see it in Celsius, or the other way round. Tap a row in the charts to load that temperature.</p>
+    </div>
+  </div>
+  <div class="tool">
+    <div class="wrap">
+      <section class="panel" aria-labelledby="h1c">
+        <h2 id="h1c"><span class="ja">換算</span><span class="en">Convert</span></h2>
+        <div class="big">
+          <div class="field"><label for="fIn"><span class="ja">華氏</span><span class="en">Fahrenheit</span> <span class="unit">°F</span></label><input type="text" id="fIn" inputmode="decimal" value="72" autocomplete="off"></div>
+          <span class="swap">⇄</span>
+          <div class="field"><label for="cIn"><span class="ja">摂氏</span><span class="en">Celsius</span> <span class="unit">°C</span></label><input type="text" id="cIn" inputmode="decimal" value="" autocomplete="off"></div>
+        </div>
+        <div class="out" id="out" role="status"></div>
+        <div><div class="scale"><i id="mark"></i></div><div class="scale-l"><span>-20 °C</span><span>0</span><span>20</span><span>40 °C</span></div></div>
+      </section>
+      <div class="grid3">
+        <section class="panel" aria-labelledby="h2c"><h2 id="h2c"><span class="ja">天気</span><span class="en">Weather</span></h2><div class="tw"><table id="wx"></table></div></section>
+        <section class="panel" aria-labelledby="h3c"><h2 id="h3c"><span class="ja">体温</span><span class="en">Body temperature</span></h2><div class="tw"><table id="body"></table></div><p class="note"><span class="ja">目安です。体調の判断は医師に相談してください。</span><span class="en">A rough guide only. Ask a doctor about your health.</span></p></section>
+        <section class="panel" aria-labelledby="h4c"><h2 id="h4c"><span class="ja">オーブン・料理</span><span class="en">Oven and cooking</span></h2><div class="tw"><table id="oven"></table></div></section>
+      </div>
+      <p class="rel"><span class="ja">長さの換算は <a href="neji.html">インチ・ねじ早見帳</a> に、旅行中の通貨の換算はアプリ <a href="valutapro.html">ValutaPro</a> にあります。</span><span class="en">For lengths, see the <a href="neji.html">Inch &amp; Thread Pocket Guide</a>. For money on the road, try our app <a href="valutapro.html">ValutaPro</a>.</span></p>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> K&amp;K Company</span>
+    <span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">Designed in Japan for the world</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const en = () => document.body.className === "lang-en";
+  const tx = (a, b) => en() ? b : a;
+  const r1 = (x) => (Math.round(x * 10) / 10).toFixed(1).replace(/\.0$/, "");
+  const f2c = (f) => (f - 32) * 5 / 9, c2f = (c) => c * 9 / 5 + 32;
+  const num = (s) => { s = String(s).trim().replace(/[°℃℉FfCc\s]/g, "").replace(/^−/, "-"); return s !== "" && !isNaN(Number(s)) ? Number(s) : null; };
+  let side = "f";
+  function feel(c) {
+    if (c <= -10) return tx("とても寒い（厚手のコート・手袋）", "Very cold: heavy coat and gloves");
+    if (c <= 0) return tx("氷点下（凍結に注意）", "Below freezing: watch for ice");
+    if (c <= 10) return tx("寒い（コートが必要）", "Cold: wear a coat");
+    if (c <= 18) return tx("肌寒い（上着があると安心）", "Cool: bring a jacket");
+    if (c <= 25) return tx("過ごしやすい", "Comfortable");
+    if (c <= 30) return tx("暑い", "Warm");
+    if (c <= 35) return tx("とても暑い（熱中症に注意）", "Hot: watch for heat illness");
+    return tx("危険な暑さ", "Dangerously hot");
+  }
+  function show() {
+    const f = num($("fIn").value), c = num($("cIn").value);
+    let C = null;
+    if (side === "f") { if (f == null) { $("cIn").value = ""; } else { C = f2c(f); $("cIn").value = r1(C); } }
+    else { if (c == null) { $("fIn").value = ""; } else { C = c; $("fIn").value = r1(c2f(c)); } }
+    const out = $("out");
+    if (C == null) { out.textContent = tx("数字を入れてください（マイナスは -10 のように）", "Enter a number (use -10 for minus)"); $("mark").hidden = true; return; }
+    const F = c2f(C);
+    out.textContent = "";
+    const a = document.createElement("div"); a.className = "feel"; a.textContent = r1(F) + " °F = " + r1(C) + " °C　" + (C > -40 && C < 50 ? "· " + feel(C) : "");
+    const b = document.createElement("div"); b.className = "note"; b.textContent = tx("計算：(°F − 32) × 5 ÷ 9 = °C　／　°C × 9 ÷ 5 + 32 = °F", "Formula: (°F − 32) × 5 ÷ 9 = °C  /  °C × 9 ÷ 5 + 32 = °F");
+    out.append(a, b);
+    const pos = Math.max(0, Math.min(100, (C + 20) / 60 * 100)); $("mark").hidden = false; $("mark").style.left = pos + "%";
+  }
+  $("fIn").addEventListener("input", () => { side = "f"; show(); });
+  $("cIn").addEventListener("input", () => { side = "c"; show(); });
+  function table(id, rows) {
+    const t = $(id); t.textContent = "";
+    const th = document.createElement("tr"); ["°F", "°C", ""].forEach((x) => { const e = document.createElement("th"); e.textContent = x; th.append(e); }); t.append(th);
+    rows.forEach(([f, lj, le, c]) => {
+      const tr = document.createElement("tr");
+      const a = document.createElement("td"); a.textContent = f;
+      const b = document.createElement("td"); b.textContent = c != null ? c : r1(f2c(f));
+      const l = document.createElement("td"); l.className = "lbl"; l.textContent = en() ? le : lj;
+      tr.append(a, b, l); tr.addEventListener("click", () => { $("fIn").value = f; side = "f"; show(); window.scrollTo({ top: 0, behavior: "smooth" }); }); tr.style.cursor = "pointer";
+      t.append(tr);
+    });
+  }
+  function drawTables() {
+    table("wx", [[-4,"","",null],[14,"","",null],[23,"","",null],[32,"水が凍る","Water freezes",null],[41,"","",null],[50,"","",null],[59,"","",null],[68,"室温の目安","Room temperature",null],[77,"","",null],[86,"","",null],[95,"","",null],[104,"","",null]]);
+    table("body", [[96.8,"","",null],[97.7,"平熱の範囲","Normal range",null],[98.6,"平熱の目安（37 °C）","Typical normal",null],[99.5,"","",null],[100.4,"発熱の目安（38 °C）","Fever (common threshold)",null],[101.3,"","",null],[102.2,"","",null],[103.1,"","",null],[104,"高熱（40 °C）","High fever",null]]);
+    table("oven", [[250,"低温","Very low",null],[300,"","",null],[325,"","",null],[350,"焼き菓子の定番","Most baking",null],[375,"","",null],[400,"","",null],[425,"高温（ロースト）","Hot (roasting)",null],[450,"","",null],[500,"","",null]]);
+  }
+  new MutationObserver(() => { drawTables(); show(); }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  drawTables(); show();
+})();
+</script>
+</body>
+</html>
