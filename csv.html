@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV・Excel 行列入れ替え｜見出し行の指定・空行の削除も（無料）</title>
+<meta name="description" content="CSV・Excel の行と列を入れ替える無料ツール。見出し行の指定、空の行・列の削除、Shift_JIS の読み込み、複数シートの選択に対応。ブラウザの中だけで動き、ファイルはどこにも送りません。">
+<meta property="og:title" content="CSV・Excel 行列入れ替え｜見出し行の指定・空行の削除も（無料）">
+<meta property="og:description" content="CSV・Excel の行と列を入れ替える無料ツール。見出し行の指定、空の行・列の削除、Shift_JIS の読み込み、複数シートの選択に対応。ブラウザの中だけで動き、ファイルはどこにも送りません。">
+<meta property="og:url" content="https://kkcompany-global.github.io/csv.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<style>
+.tool{padding:40px 0 72px}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start;margin-bottom:20px}
+.tool .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0;margin-bottom:20px}
+.tool .grid2 .panel{margin-bottom:0}
+.tool h2{font-size:1.15rem;font-weight:800}
+.tool label{font-weight:600;font-size:.9rem}
+.tool input[type=text]{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+.tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tool .eq{color:var(--muted);padding-bottom:12px}
+@media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out b{font-weight:600;color:var(--brand)}
+.tool .out.err{background:#fff4e0}
+.tool .chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
+.tool .chip:hover{border-color:var(--brand-2)}
+.tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+.tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.tool td:first-child,.tool th:first-child{text-align:left}
+.tool td.name{font-weight:600;color:var(--brand)}
+.tool tr.hl td{background:#fff8eb}
+.tool tr.hit td{background:#e8efff}
+.tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tool .frac div.q{background:#fff8eb}
+.tool .frac div span:last-child{color:var(--muted)}
+.tool .note{font-size:.8rem;color:var(--muted);text-align:left}
+.tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
+
+.tool .drop{border:2px dashed var(--line);border-radius:var(--radius);padding:22px;text-align:center;color:var(--muted);background:var(--bg);display:flex;flex-direction:column;gap:10px;align-items:center}
+.tool .drop.on{border-color:var(--brand-2);background:#eef3ff}
+.tool .btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tool .tbtn{font:inherit;font-size:.9rem;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:42px}
+.tool .tbtn:hover{border-color:var(--brand-2)}
+.tool .tbtn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.tool .tbtn.pri:hover{background:var(--brand-2)}
+.tool .tbtn[aria-pressed="true"]{background:#eef3ff;border-color:var(--brand-2);color:var(--brand)}
+.tool select{font:inherit;font-size:.9rem;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;min-height:42px;background:var(--surface);color:var(--text)}
+.tool textarea{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;width:100%;min-height:90px;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;color:var(--text);background:var(--surface)}
+.tool .opts{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.9rem}
+.tool .opts label{font-weight:500;display:inline-flex;gap:6px;align-items:center}
+.tool .sheet th.xh,.tool .sheet td.xh{background:#f0f2f6;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:.75rem;text-align:center;min-width:36px}
+.tool .sheet tr.hd td:not(.xh){background:#eef3ff;font-weight:600;color:var(--brand)}
+.tool .sheet td{text-align:left;max-width:220px;overflow:hidden;text-overflow:ellipsis;font-size:.82rem}
+.tool .sheet .tw{max-height:420px}
+.tool .sum{font-size:.88rem;color:var(--muted)}
+.tool [hidden]{display:none!important}
+.tool .msg{font-size:.88rem;color:#a85f00;min-height:1.2em}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSV・Excel 行列入れ替え","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"CSV・Excel の行と列を入れ替える無料ツール。見出し行の指定、空の行・列の削除、Shift_JIS の読み込み、複数シートの選択に対応。ブラウザの中だけで動き、ファイルはどこにも送りません。","publisher":{"@type":"Organization","name":"K&K Company"}}</script>
+</head>
+<body class="lang-ja" data-title-ja="CSV・Excel 行列入れ替え｜見出し行の指定・空行の削除も（無料）" data-title-en="CSV & Excel Transpose | Swap rows and columns online, free">
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <nav class="nav-links">
+      <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
+      <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
+      <a href="index.html#tools"><span class="ja">無料ツール</span><span class="en">Free tools</span></a>
+      <a href="index.html#contact"><span class="ja">お問い合わせ</span><span class="en">Contact</span></a>
+      <button class="lang-btn" id="langBtn" type="button">English</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="app-hero">
+    <div class="wrap">
+      <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
+      <div class="head">
+        <div class="big-icon" style="background:#166534">⇄</div>
+        <div>
+          <h1><span class="ja">CSV・Excel 行列入れ替え</span><span class="en">CSV &amp; Excel Transpose</span></h1>
+          <div class="sub"><span class="ja">行と列を入れ替えて、Excel にそのまま戻せます</span><span class="en">Swap rows and columns, then take it straight back to Excel</span></div>
+        </div>
+      </div>
+      <p class="lead ja">項目名が縦に並んだ表を横向きに直したり、上のメモ行を飛ばして見出しを決めたり、空の行・列を消したりできます。登録不要・無料。ファイルはブラウザの中だけで処理し、どこにも送りません。</p><p class="lead en">Turn a sideways table the right way round, skip note rows above the header, and drop empty rows and columns. Free, no sign-up. Files are processed only in your browser and never uploaded.</p>
+    </div>
+  </div>
+
+  <div class="tool">
+    <div class="wrap">
+      <section class="panel" aria-labelledby="h1c">
+        <h2 id="h1c"><span class="ja">1. ファイルを読み込む</span><span class="en">1. Load your data</span></h2>
+        <div class="drop" id="drop">
+          <span><span class="ja">CSV・Excel（.xlsx）・タブ区切りのファイルをここにドラッグ</span><span class="en">Drag a CSV, Excel (.xlsx) or tab-separated file here</span></span>
+          <label class="tbtn pri" for="fileIn"><span class="ja">ファイルを選ぶ</span><span class="en">Choose a file</span></label>
+          <input type="file" id="fileIn" accept=".csv,.tsv,.txt,.xlsx,.xls,.xlsm,text/csv" hidden>
+          <span class="note"><span class="ja">Shift_JIS（古いソフトや取引先のダウンロード）も読めます</span><span class="en">Shift_JIS files (common in Japan) are supported too</span></span>
+        </div>
+        <label for="pasteIn"><span class="ja">または、Excel でコピーした範囲を貼り付け</span><span class="en">Or paste a range copied from Excel</span></label>
+        <textarea id="pasteIn" spellcheck="false"></textarea>
+        <div class="btnrow"><button class="tbtn" type="button" id="pasteBtn"><span class="ja">貼り付けた内容を読む</span><span class="en">Use pasted data</span></button></div>
+        <p class="msg" id="msg" role="status"></p>
+      </section>
+
+      <section class="panel sheet" id="work" aria-labelledby="h2c">
+        <h2 id="h2c"><span class="ja">2. 整える</span><span class="en">2. Tidy it up</span></h2>
+        <div class="btnrow" id="sheetRow" hidden><label for="sheetSel"><span class="ja">シート（タブ）</span><span class="en">Sheet</span></label><select id="sheetSel"></select></div>
+        <div class="btnrow">
+          <button class="tbtn" type="button" id="flipBtn" aria-pressed="false">⇄ <span class="ja">行と列を入れ替える</span><span class="en">Swap rows and columns</span></button>
+          <label for="hrSel" id="hrLbl"></label><select id="hrSel"></select>
+        </div>
+        <div class="opts">
+          <label><input type="checkbox" id="optBlankRows" checked><span class="ja">空の行を消す</span><span class="en">Remove empty rows</span></label>
+          <label><input type="checkbox" id="optBlankCols" checked><span class="ja">空の列を消す</span><span class="en">Remove empty columns</span></label>
+          <label><input type="checkbox" id="optTrim" checked><span class="ja">前後の空白を取る</span><span class="en">Trim spaces</span></label>
+        </div>
+        <p class="sum" id="sum"></p>
+        <div class="tw"><table id="prev"></table></div>
+        <p class="note" id="more"></p>
+        <h2><span class="ja">3. 持ち帰る</span><span class="en">3. Take it back</span></h2>
+        <div class="btnrow">
+          <button class="tbtn pri" type="button" id="saveBtn"><span class="ja">CSV で保存</span><span class="en">Save as CSV</span></button>
+          <button class="tbtn" type="button" id="copyBtn"><span class="ja">コピー（Excel に貼り付け用）</span><span class="en">Copy for Excel</span></button>
+        </div>
+        <p class="note"><span class="ja">保存する CSV は Excel で文字化けしない形式（UTF-8・BOM 付き）です。見出しの行より上は取り除きます。</span><span class="en">The CSV opens in Excel without garbled characters (UTF-8 with BOM). Rows above the header are removed.</span></p>
+      </section>
+
+      <p class="rel"><span class="ja">Excel の台帳をそのまま取り込んで、フォームや帳票を作れる業務データベース <a href="notans.html">ノータンスアプローチ2027</a> も開発しています。</span><span class="en">We are also building <a href="notans.html">Notans Approach 2027</a>, a business database that takes in your Excel ledgers and turns them into forms and printouts.</span></p>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> K&amp;K Company</span>
+    <span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">Designed in Japan for the world</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const isEn = () => document.body.className === "lang-en";
+  const tx = (ja, en) => isEn() ? en : ja;
+  let raw = null, flip = false, hr = 0, fileName = "data", sheets = null, sheet = "", fileObj = null;
+
+  function parseCSV(text, delim) {
+    const rows = []; let row = [], cell = "", q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+      else if (c === '"') q = true;
+      else if (c === delim) { row.push(cell); cell = ""; }
+      else if (c === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+      else if (c !== "\r") cell += c;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  function parseText(text) {
+    text = text.replace(/^﻿/, "");
+    const first = text.split(/\r?\n/)[0] || "";
+    const delim = (first.match(/\t/g) || []).length > (first.match(/,/g) || []).length ? "\t" : ",";
+    return parseCSV(text, delim);
+  }
+  function decode(buf) { try { return new TextDecoder("utf-8", { fatal: true }).decode(buf); } catch (e) { return new TextDecoder("shift_jis").decode(buf); } }
+  function colLetter(i) { let s = ""; do { s = String.fromCharCode(65 + (i % 26)) + s; i = Math.floor(i / 26) - 1; } while (i >= 0); return s; }
+  const s = (x) => String(x == null ? "" : x).trim();
+  function width(R) { return Math.max(0, ...R.map((r) => r.length)); }
+  function transpose(R) { const n = width(R); return Array.from({ length: n }, (_, c) => R.map((r) => r[c] == null ? "" : r[c])); }
+  function findHeader(R) {
+    const isNum = (x) => /^-?[\d,.\s]+$/.test(x);
+    let best = 0, bestScore = -1;
+    for (let i = 0; i < Math.min(10, R.length - 1); i++) {
+      const below = R.slice(i + 1, i + 8), n = Math.max(0, ...R.slice(i, i + 8).map((r) => r.length));
+      let used = 0, named = 0; const names = [];
+      for (let c = 0; c < n; c++) {
+        if (below.filter((r) => s(r[c]) !== "").length < Math.min(2, below.length)) continue;
+        used++; const v = s(R[i][c]); if (v !== "" && !isNum(v)) { named++; names.push(v); }
+      }
+      if (!used) continue;
+      const score = (named / used) * (names.length ? new Set(names).size / names.length : 0);
+      if (score > bestScore + 0.05) { best = i; bestScore = score; }
+    }
+    return best;
+  }
+  // Rows above the start of the table (titles, notes) are skipped first, in the file's own orientation,
+  // then the table is turned if asked. Row numbers stay the file's own, like Excel.
+  function cleaned() {
+    let R = raw.map((r, i) => ({ cells: r, lab: i + 1 }));
+    if ($("optBlankRows").checked) R = R.filter((r) => r.cells.some((c) => s(c) !== ""));
+    let rows = R.map((r) => r.cells);
+    let keep = Array.from({ length: width(rows) }, (_, i) => i);
+    if ($("optBlankCols").checked) keep = keep.filter((c) => rows.some((r) => s(r[c]) !== ""));
+    return { rows: rows.map((r) => keep.map((c) => r[c] == null ? "" : r[c])), labs: R.map((r) => r.lab) };
+  }
+  function findStart(rows) {
+    // the first row that is nearly as full as the fullest row near the top
+    const full = rows.slice(0, 12).map((r) => r.filter((c) => s(c) !== "").length), most = Math.max(0, ...full);
+    for (let i = 0; i < Math.min(10, rows.length - 1); i++) if (full[i] >= Math.max(2, most * 0.6)) return i;
+    return 0;
+  }
+  function guessStart() { const c = cleaned(); return flip ? findStart(c.rows) : findHeader(c.rows); }
+  function view() {
+    if (!raw) return null;
+    const c = cleaned();
+    let rows = c.rows.slice(hr);
+    if (flip) rows = transpose(rows);
+    return { rows, labs: c.labs };
+  }
+  function result(v) { return v.rows.map((r) => r.map((c) => $("optTrim").checked ? s(c) : (c == null ? "" : String(c)))); }
+
+  function draw() {
+    const box = $("work"); box.hidden = !raw; if (!raw) return;
+    const v = view();
+    const sel = $("hrSel"); sel.textContent = "";
+    for (let i = 0; i < Math.min(10, Math.max(1, v.labs.length - 1)); i++) { const o = document.createElement("option"); o.value = i; o.textContent = tx(v.labs[i] + " 行目", "Row " + v.labs[i]); sel.append(o); }
+    if (hr >= sel.options.length) hr = 0;
+    sel.value = String(hr);
+    $("hrLbl").textContent = flip ? tx("表の始まり（それより上のメモは飛ばす）", "Table starts at (notes above are skipped)") : tx("項目名（見出し）の行（それより上は飛ばす）", "Header row (rows above are skipped)");
+    $("flipBtn").setAttribute("aria-pressed", String(flip));
+    const R = result(v), nC = width(R);
+    $("sum").textContent = tx("項目 " + nC + " 個 × データ " + Math.max(0, R.length - 1) + " 行", nC + " fields × " + Math.max(0, R.length - 1) + " rows") + (flip ? tx("（行と列を入れ替え中）", " (transposed)") : "");
+    // preview: up to 12 rows × 12 columns, Excel-style labels of the result
+    const t = $("prev"); t.textContent = "";
+    const th = document.createElement("thead"), tr0 = document.createElement("tr");
+    const corner = document.createElement("th"); corner.className = "xh"; tr0.append(corner);
+    const show = Math.min(12, nC);
+    for (let c = 0; c < show; c++) { const x = document.createElement("th"); x.className = "xh"; x.textContent = colLetter(c); tr0.append(x); }
+    th.append(tr0); t.append(th);
+    const tb = document.createElement("tbody");
+    R.slice(0, 12).forEach((r, i) => {
+      const tr = document.createElement("tr"); if (i === 0) tr.className = "hd";
+      const x = document.createElement("td"); x.className = "xh"; x.textContent = i + 1; tr.append(x);
+      for (let c = 0; c < show; c++) { const d = document.createElement("td"); d.textContent = r[c] == null ? "" : r[c]; d.title = d.textContent; tr.append(d); }
+      tb.append(tr);
+    });
+    t.append(tb);
+    $("more").textContent = (R.length > 12 || nC > 12) ? tx("先頭の 12 行 × 12 列を表示しています。保存・コピーは全体です。", "Showing the first 12 rows × 12 columns. Save and copy include everything.") : "";
+  }
+
+  async function load(file) {
+    fileObj = file; fileName = file.name.replace(/\.[^.]+$/, "") || "data"; $("msg").textContent = "";
+    try {
+      const buf = await file.arrayBuffer();
+      if (/\.(xlsx|xlsm|xls)$/i.test(file.name)) {
+        if (!window.XLSX) throw new Error("xlsx");
+        const wb = XLSX.read(buf, { type: "array" });
+        sheets = wb.SheetNames; sheet = sheet && sheets.includes(sheet) ? sheet : sheets[0];
+        raw = XLSX.utils.sheet_to_json(wb.Sheets[sheet], { header: 1, raw: false, defval: "", blankrows: true });
+      } else { sheets = null; raw = parseText(decode(buf)); }
+      afterLoad();
+    } catch (e) { raw = null; draw(); $("msg").textContent = e && e.message === "xlsx" ? tx("Excel を読む部品を読み込めませんでした。通信を確かめるか、CSV で保存してから読み込んでください。", "Couldn't load the Excel reader. Check your connection, or save the file as CSV first.") : tx("読み込めませんでした。ファイルの形式を確かめてください。", "Couldn't read that file. Check its format."); }
+  }
+  function afterLoad() {
+    const sp = $("sheetRow"); sp.hidden = !(sheets && sheets.length > 1);
+    if (sheets) { const sl = $("sheetSel"); sl.textContent = ""; sheets.forEach((n) => { const o = document.createElement("option"); o.value = n; o.textContent = n; sl.append(o); }); sl.value = sheet; }
+    flip = false; hr = 0; hr = guessStart(); draw();
+    $("work").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function toCSV(R, delim) { const esc = (x) => /[",\r\n\t]/.test(x) ? '"' + x.replace(/"/g, '""') + '"' : x; return R.map((r) => r.map((c) => esc(String(c))).join(delim)).join("\r\n"); }
+  function save() {
+    const v = view(); if (!v) return;
+    const blob = new Blob(["﻿" + toCSV(result(v), ",")], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fileName + (flip ? "_transposed" : "") + ".csv";
+    document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  async function copy() {
+    const v = view(); if (!v) return;
+    const text = toCSV(result(v), "\t");
+    try { await navigator.clipboard.writeText(text); $("msg").textContent = tx("コピーしました。Excel のセルを選んで貼り付けてください。", "Copied. Select a cell in Excel and paste."); }
+    catch (e) { const ta = $("pasteIn"); ta.value = text; ta.select(); $("msg").textContent = tx("自動でコピーできなかったので、下の欄に入れました。そのままコピーしてください。", "Couldn't copy automatically, so the text is in the box below. Copy it from there."); }
+  }
+
+  $("fileIn").addEventListener("change", (e) => { const f = e.target.files[0]; if (f) { sheet = ""; load(f); } e.target.value = ""; });
+  const drop = $("drop");
+  ["dragenter", "dragover"].forEach((k) => drop.addEventListener(k, (e) => { e.preventDefault(); drop.classList.add("on"); }));
+  ["dragleave", "drop"].forEach((k) => drop.addEventListener(k, (e) => { e.preventDefault(); drop.classList.remove("on"); }));
+  drop.addEventListener("drop", (e) => { const f = e.dataTransfer.files[0]; if (f) { sheet = ""; load(f); } });
+  $("pasteBtn").addEventListener("click", () => { const t = $("pasteIn").value; if (!t.trim()) { $("msg").textContent = tx("貼り付ける欄が空です。", "The paste box is empty."); return; } fileName = "data"; sheets = null; raw = parseText(t); afterLoad(); });
+  $("sheetSel").addEventListener("change", () => { sheet = $("sheetSel").value; if (fileObj) load(fileObj); });
+  $("flipBtn").addEventListener("click", () => { flip = !flip; hr = guessStart(); draw(); });
+  $("hrSel").addEventListener("change", () => { hr = Number($("hrSel").value); draw(); });
+  ["optBlankRows", "optBlankCols", "optTrim"].forEach((id) => $(id).addEventListener("change", () => { hr = guessStart(); draw(); }));
+  $("saveBtn").addEventListener("click", save);
+  $("copyBtn").addEventListener("click", copy);
+  new MutationObserver(draw).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+
+  // a small example so the page shows what it does
+  $("pasteIn").value = "例：項目名が縦に並んだ表（上の行はメモ）\n品番,A-100,B-200,C-300\n品名,ボルト,ナット,ワッシャー\n材質,SUS304,SS400,SUS304\n数量,120,80,45";
+  raw = parseText($("pasteIn").value); flip = true; hr = guessStart(); draw();
+})();
+</script>
+</body>
+</html>
