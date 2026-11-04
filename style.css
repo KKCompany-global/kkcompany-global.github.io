@@ -23,6 +23,19 @@ header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop
 .nav-links a:hover{color:var(--text)}
 .lang-btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font:inherit;font-size:.82rem;cursor:pointer;color:var(--text)}
 @media (max-width:720px){.nav-links a{display:none}}
+/* phone menu */
+.menu-btn{display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:0;flex:none}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s}
+.menu-open .menu-btn span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-open .menu-btn span:nth-child(2){opacity:0}
+.menu-open .menu-btn span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{border-top:1px solid var(--line);background:var(--surface);padding:4px 20px 10px;display:flex;flex-direction:column}
+.mnav[hidden]{display:none}
+.mnav a{padding:13px 4px;border-bottom:1px solid var(--line);color:var(--text);font-weight:600;font-size:1rem}
+.mnav a:last-child{border-bottom:none}
+@media (max-width:720px){.menu-btn{display:flex}.nav{gap:10px}.nav-links{margin-left:auto}}
+@media (min-width:721px){.mnav{display:none!important}}
+@media (prefers-reduced-motion:reduce){.menu-btn span{transition:none}}
 
 /* hero */
 .hero{padding:96px 0 80px;background:radial-gradient(1200px 500px at 80% -10%,#cdd9ff 0,transparent 62%),radial-gradient(800px 400px at -10% 110%,#fff1d6 0,transparent 60%)}

@@ -13,15 +13,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=6">
 <style>
 .tool{padding:40px 0 72px}
-.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start;margin-bottom:20px}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px;align-items:start;margin-bottom:20px}
 .tool .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0;margin-bottom:20px}
 .tool .grid2 .panel{margin-bottom:0}
 .tool h2{font-size:1.15rem;font-weight:800}
 .tool label{font-weight:600;font-size:.9rem}
-.tool input[type=text]{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
+.tool input[type=text]{min-width:0;font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
 .tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
 .tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
 .tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -113,7 +113,7 @@
         <div class="grid2">
           <div class="field" style="display:flex;flex-direction:column;gap:8px">
             <label for="hCm"><span class="ja">身長（cm）</span><span class="en">Height (cm)</span></label><input type="text" id="hCm" inputmode="decimal" value="170" autocomplete="off">
-            <div class="inrow" style="grid-template-columns:1fr 1fr">
+            <div class="inrow" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
               <div class="field"><label for="hFt"><span class="ja">フィート</span><span class="en">feet</span></label><input type="text" id="hFt" inputmode="numeric" autocomplete="off"></div>
               <div class="field"><label for="hIn"><span class="ja">インチ</span><span class="en">inches</span></label><input type="text" id="hIn" inputmode="decimal" autocomplete="off"></div>
             </div>
@@ -121,7 +121,7 @@
           </div>
           <div class="field" style="display:flex;flex-direction:column;gap:8px">
             <label for="wKg"><span class="ja">体重（kg）</span><span class="en">Weight (kg)</span></label><input type="text" id="wKg" inputmode="decimal" value="65" autocomplete="off">
-            <div class="inrow" style="grid-template-columns:1fr 1fr">
+            <div class="inrow" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
               <div class="field"><label for="wLb"><span class="ja">ポンド</span><span class="en">pounds</span></label><input type="text" id="wLb" inputmode="numeric" autocomplete="off"></div>
               <div class="field"><label for="wOz"><span class="ja">オンス</span><span class="en">ounces</span></label><input type="text" id="wOz" inputmode="decimal" autocomplete="off"></div>
             </div>
@@ -139,7 +139,7 @@
     <span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">Designed in Japan for the world</span>
   </div>
 </footer>
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 <script>
 (function () {
   const C = [{"k": "len", "ja": "長さ", "en": "Length", "u": [["mm", "ミリ", "mm", 0.001], ["cm", "センチ", "cm", 0.01], ["m", "メートル", "m", 1], ["km", "キロ", "km", 1000], ["in", "インチ", "inch", 0.0254], ["ft", "フィート", "foot", 0.3048], ["yd", "ヤード", "yard", 0.9144], ["mi", "マイル", "mile", 1609.344]], "def_": "ft", "dv": 6, "ex": [["1 フィート ≈ 30 cm（定規1本）", "1 ft ≈ 30 cm, a school ruler"], ["1 ヤード ≈ 91 cm（ゴルフやアメフトの距離）", "1 yd ≈ 91 cm, used in golf and football"], ["1 マイル ≈ 1.6 km（車の速度・距離）", "1 mile ≈ 1.6 km, road distances"]]}, {"k": "area", "ja": "広さ", "en": "Area", "u": [["m2", "平方メートル", "m²", 1], ["tsubo", "坪", "tsubo", 3.3057851239669422], ["jo", "畳（1.62 ㎡）", "tatami mat", 1.62], ["a", "アール", "are", 100], ["ha", "ヘクタール", "hectare", 10000], ["km2", "平方キロ", "km²", 1000000.0], ["sqft", "平方フィート", "sq ft", 0.09290304], ["sqyd", "平方ヤード", "sq yd", 0.83612736], ["acre", "エーカー", "acre", 4046.8564224]], "def_": "sqft", "dv": 1000, "ex": [["1 ヘクタール ＝ 100 m × 100 m ≈ 3,025 坪", "1 ha = 100 m × 100 m"], ["1 エーカー ≈ 4,047 ㎡ ≈ 1,224 坪（テニスコート約15面）", "1 acre ≈ 4,047 m², about 15 tennis courts"], ["アメリカの家の広さは平方フィート。1,000 sq ft ≈ 93 ㎡ ≈ 28 坪", "US homes are listed in sq ft: 1,000 sq ft ≈ 93 m²"]]}, {"k": "wt", "ja": "重さ", "en": "Weight", "u": [["g", "グラム", "g", 1], ["kg", "キロ", "kg", 1000], ["t", "トン", "metric ton", 1000000.0], ["oz", "オンス", "ounce", 28.349523125], ["lb", "ポンド", "pound", 453.59237], ["ust", "米トン", "US ton", 907184.74]], "def_": "lb", "dv": 1, "ex": [["1 ポンド ≈ 454 g（アメリカのバター1箱）", "1 lb ≈ 454 g, a US box of butter"], ["1 オンス ≈ 28 g", "1 oz ≈ 28 g"], ["体重 150 ポンド ≈ 68 kg", "A body weight of 150 lb ≈ 68 kg"]]}, {"k": "vol", "ja": "量（かさ）", "en": "Volume", "u": [["ml", "ミリリットル", "mL", 0.001], ["l", "リットル", "L", 1], ["tsp", "小さじ（米）", "teaspoon", 0.00492892159375], ["tbsp", "大さじ（米）", "tablespoon", 0.01478676478125], ["floz", "液量オンス", "fl oz", 0.0295735295625], ["cup", "カップ（米）", "cup", 0.2365882365], ["pt", "パイント", "pint", 0.473176473], ["qt", "クォート", "quart", 0.946352946], ["gal", "ガロン", "gallon", 3.785411784]], "def_": "gal", "dv": 1, "ex": [["1 ガロン ≈ 3.8 L（大きい牛乳の容器）", "1 gal ≈ 3.8 L, a big milk jug"], ["アメリカの1カップ ≈ 237 mL（日本の1カップは 200 mL）", "A US cup ≈ 237 mL (a Japanese cup is 200 mL)"], ["ガソリンの値段はガロンあたり。$3.50/gal ≈ 1 L あたり $0.92", "Gas is priced per gallon: $3.50/gal ≈ $0.92 per liter"]]}, {"k": "spd", "ja": "速さ", "en": "Speed", "u": [["kmh", "キロ毎時", "km/h", 1], ["mph", "マイル毎時", "mph", 1.609344], ["ms", "メートル毎秒", "m/s", 3.6], ["kn", "ノット", "knot", 1.852]], "def_": "mph", "dv": 65, "ex": [["高速道路の制限 65 mph ≈ 105 km/h", "A 65 mph highway limit ≈ 105 km/h"], ["住宅街の 25 mph ≈ 40 km/h", "25 mph in town ≈ 40 km/h"]]}, {"k": "fuel", "ja": "燃費", "en": "Fuel economy", "u": [["kml", "キロ毎リットル", "km/L", 1], ["mpg", "マイル毎ガロン", "mpg (US)", 0.425143707], ["l100", "リットル毎100キロ", "L/100 km", null]], "def_": "mpg", "dv": 30, "ex": [["30 mpg ≈ 12.8 km/L", "30 mpg ≈ 12.8 km/L"], ["数字が大きいほど燃費が良い（L/100 km だけは小さいほど良い）", "Higher is better, except L/100 km where lower is better"]]}, {"k": "pres", "ja": "空気圧", "en": "Pressure", "u": [["kpa", "キロパスカル", "kPa", 1], ["psi", "psi", "psi", 6.894757293168], ["bar", "バール", "bar", 100], ["kgf", "kgf/㎠", "kgf/cm²", 98.0665]], "def_": "psi", "dv": 35, "ex": [["タイヤの空気圧 35 psi ≈ 241 kPa ≈ 2.4 kgf/㎠", "A 35 psi tire ≈ 241 kPa ≈ 2.4 kgf/cm²"]]}];
