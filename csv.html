@@ -132,10 +132,11 @@
         <p class="note" id="more"></p>
         <h2><span class="ja">3. 持ち帰る</span><span class="en">3. Take it back</span></h2>
         <div class="btnrow">
-          <button class="tbtn pri" type="button" id="saveBtn"><span class="ja">CSV で保存</span><span class="en">Save as CSV</span></button>
+          <button class="tbtn pri" type="button" id="xlsxBtn"><span class="ja">Excel で保存（シートもそのまま）</span><span class="en">Save as Excel (keeps all sheets)</span></button>
+          <button class="tbtn" type="button" id="saveBtn"><span class="ja">CSV で保存（表示中のシートのみ）</span><span class="en">Save as CSV (this sheet only)</span></button>
           <button class="tbtn" type="button" id="copyBtn"><span class="ja">コピー（Excel に貼り付け用）</span><span class="en">Copy for Excel</span></button>
         </div>
-        <p class="note"><span class="ja">保存する CSV は Excel で文字化けしない形式（UTF-8・BOM 付き）です。見出しの行より上は取り除きます。</span><span class="en">The CSV opens in Excel without garbled characters (UTF-8 with BOM). Rows above the header are removed.</span></p>
+        <p class="note"><span class="ja">CSV はシートを1枚しか持てない形式なので、複数シートの Excel は「Excel で保存」を使ってください。シートごとに入れ替え・見出しの設定を覚えて保存します。CSV は Excel で文字化けしない形式（UTF-8・BOM 付き）です。</span><span class="en">CSV holds only one sheet, so use "Save as Excel" for multi-sheet workbooks; each sheet keeps its own settings. The CSV opens in Excel without garbled characters (UTF-8 with BOM).</span></p>
       </section>
 
       <p class="rel"><span class="ja">Excel の台帳をそのまま取り込んで、フォームや帳票を作れる業務データベース <a href="notans.html">ノータンスアプローチ2027</a> も開発しています。</span><span class="en">We are also building <a href="notans.html">Notans Approach 2027</a>, a business database that takes in your Excel ledgers and turns them into forms and printouts.</span></p>
@@ -155,7 +156,7 @@
   const $ = (id) => document.getElementById(id);
   const isEn = () => document.body.className === "lang-en";
   const tx = (ja, en) => isEn() ? en : ja;
-  let raw = null, flip = false, hr = 0, fileName = "data", sheets = null, sheet = "", fileObj = null, book = null;
+  let raw = null, flip = false, hr = 0, fileName = "data", sheets = null, sheet = "", fileObj = null, book = null, perSheet = {};
 
   function parseCSV(text, delim) {
     const rows = []; let row = [], cell = "", q = false;
@@ -259,7 +260,7 @@
       if (/\.(xlsx|xlsm|xls)$/i.test(file.name)) {
         if (!window.XLSX) throw new Error("xlsx");
         book = XLSX.read(buf, { type: "array" });
-        sheets = book.SheetNames; sheet = sheets[0];
+        sheets = book.SheetNames; sheet = sheets[0]; perSheet = {};
         raw = readSheet(sheet);
       } else { book = null; sheets = null; raw = parseText(decode(buf)); }
       afterLoad();
@@ -281,6 +282,23 @@
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fileName + (flip ? "_transposed" : "") + ".csv";
     document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
+  function saveXlsx() {
+    if (!window.XLSX) { $("msg").textContent = tx("Excel を書き出す部品を読み込めませんでした。通信を確かめてください。", "Couldn't load the Excel writer. Check your connection."); return; }
+    const out = XLSX.utils.book_new();
+    const keep = { raw, flip, hr };
+    const names = book ? sheets : [fileName.slice(0, 31) || "Sheet1"];
+    perSheet[sheet] = { flip, hr };
+    names.forEach((name) => {
+      if (book) {
+        raw = name === sheet ? keep.raw : readSheet(name);
+        const st = perSheet[name]; if (st) { flip = st.flip; hr = st.hr; } else { flip = false; hr = guessStart(); }
+      }
+      XLSX.utils.book_append_sheet(out, XLSX.utils.aoa_to_sheet(result(view())), name);
+    });
+    raw = keep.raw; flip = keep.flip; hr = keep.hr;
+    XLSX.writeFile(out, fileName + (flip ? "_transposed" : "") + ".xlsx");
+    $("msg").textContent = book && sheets.length > 1 ? tx("すべてのシートを、それぞれの設定で保存しました。開いていないシートは、見出しを自動で判断しています。", "Saved every sheet with its own settings. Sheets you didn't open use the automatic header.") : "";
+  }
   async function copy() {
     const v = view(); if (!v) return;
     const text = toCSV(result(v), "\t");
@@ -296,14 +314,18 @@
   $("pasteBtn").addEventListener("click", () => { const t = $("pasteIn").value; if (!t.trim()) { $("msg").textContent = tx("貼り付ける欄が空です。", "The paste box is empty."); return; } fileName = "data"; sheets = null; raw = parseText(t); afterLoad(); });
   $("sheetSel").addEventListener("change", () => {
     if (!book) return;
+    perSheet[sheet] = { flip, hr };
     sheet = $("sheetSel").value;
     try { raw = readSheet(sheet); $("msg").textContent = ""; } catch (e) { $("msg").textContent = tx("このシートは読み込めませんでした。", "Couldn't read this sheet."); return; }
-    flip = false; hr = guessStart(); draw();
+    const st = perSheet[sheet];
+    if (st) { flip = st.flip; hr = st.hr; } else { flip = false; hr = guessStart(); }
+    draw();
   });
   $("flipBtn").addEventListener("click", () => { flip = !flip; hr = guessStart(); draw(); });
   $("hrSel").addEventListener("change", () => { hr = Number($("hrSel").value); draw(); });
   ["optBlankRows", "optBlankCols", "optTrim"].forEach((id) => $(id).addEventListener("change", () => { hr = guessStart(); draw(); }));
   $("saveBtn").addEventListener("click", save);
+  $("xlsxBtn").addEventListener("click", saveXlsx);
   $("copyBtn").addEventListener("click", copy);
   new MutationObserver(draw).observe(document.body, { attributes: true, attributeFilter: ["class"] });
 
