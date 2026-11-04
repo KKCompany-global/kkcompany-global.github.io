@@ -155,7 +155,7 @@
   const $ = (id) => document.getElementById(id);
   const isEn = () => document.body.className === "lang-en";
   const tx = (ja, en) => isEn() ? en : ja;
-  let raw = null, flip = false, hr = 0, fileName = "data", sheets = null, sheet = "", fileObj = null;
+  let raw = null, flip = false, hr = 0, fileName = "data", sheets = null, sheet = "", fileObj = null, book = null;
 
   function parseCSV(text, delim) {
     const rows = []; let row = [], cell = "", q = false;
@@ -258,13 +258,15 @@
       const buf = await file.arrayBuffer();
       if (/\.(xlsx|xlsm|xls)$/i.test(file.name)) {
         if (!window.XLSX) throw new Error("xlsx");
-        const wb = XLSX.read(buf, { type: "array" });
-        sheets = wb.SheetNames; sheet = sheet && sheets.includes(sheet) ? sheet : sheets[0];
-        raw = XLSX.utils.sheet_to_json(wb.Sheets[sheet], { header: 1, raw: false, defval: "", blankrows: true });
-      } else { sheets = null; raw = parseText(decode(buf)); }
+        book = XLSX.read(buf, { type: "array" });
+        sheets = book.SheetNames; sheet = sheets[0];
+        raw = readSheet(sheet);
+      } else { book = null; sheets = null; raw = parseText(decode(buf)); }
       afterLoad();
     } catch (e) { raw = null; draw(); $("msg").textContent = e && e.message === "xlsx" ? tx("Excel を読む部品を読み込めませんでした。通信を確かめるか、CSV で保存してから読み込んでください。", "Couldn't load the Excel reader. Check your connection, or save the file as CSV first.") : tx("読み込めませんでした。ファイルの形式を確かめてください。", "Couldn't read that file. Check its format."); }
   }
+  // the workbook stays in memory, so switching sheets doesn't read the file again
+  function readSheet(name) { return XLSX.utils.sheet_to_json(book.Sheets[name], { header: 1, raw: false, defval: "", blankrows: true }); }
   function afterLoad() {
     const sp = $("sheetRow"); sp.hidden = !(sheets && sheets.length > 1);
     if (sheets) { const sl = $("sheetSel"); sl.textContent = ""; sheets.forEach((n) => { const o = document.createElement("option"); o.value = n; o.textContent = n; sl.append(o); }); sl.value = sheet; }
@@ -292,7 +294,12 @@
   ["dragleave", "drop"].forEach((k) => drop.addEventListener(k, (e) => { e.preventDefault(); drop.classList.remove("on"); }));
   drop.addEventListener("drop", (e) => { const f = e.dataTransfer.files[0]; if (f) { sheet = ""; load(f); } });
   $("pasteBtn").addEventListener("click", () => { const t = $("pasteIn").value; if (!t.trim()) { $("msg").textContent = tx("貼り付ける欄が空です。", "The paste box is empty."); return; } fileName = "data"; sheets = null; raw = parseText(t); afterLoad(); });
-  $("sheetSel").addEventListener("change", () => { sheet = $("sheetSel").value; if (fileObj) load(fileObj); });
+  $("sheetSel").addEventListener("change", () => {
+    if (!book) return;
+    sheet = $("sheetSel").value;
+    try { raw = readSheet(sheet); $("msg").textContent = ""; } catch (e) { $("msg").textContent = tx("このシートは読み込めませんでした。", "Couldn't read this sheet."); return; }
+    flip = false; hr = guessStart(); draw();
+  });
   $("flipBtn").addEventListener("click", () => { flip = !flip; hr = guessStart(); draw(); });
   $("hrSel").addEventListener("change", () => { hr = Number($("hrSel").value); draw(); });
   ["optBlankRows", "optBlankCols", "optTrim"].forEach((id) => $(id).addEventListener("change", () => { hr = guessStart(); draw(); }));
