@@ -61,6 +61,9 @@
 .tool .res b{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:1.05rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .tool .res span{font-size:.82rem;color:var(--muted);white-space:nowrap}
 .tool .out .feel{font-family:"Inter",sans-serif;font-size:1.5rem;font-weight:800;color:var(--brand)}
+.tool .pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:100%;min-width:0}
+.tool .pair .field,.tool .grid2 > .field{min-width:0;width:100%}
+.tool .pair input,.tool .grid2 input{min-width:0;width:100%;max-width:100%}
 .tool .ex{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
 @media (max-width:600px){.app-hero{padding:32px 0 24px}.crumb{margin-bottom:14px}.app-hero .head{gap:14px;margin-bottom:14px}.app-hero .big-icon{width:56px;height:56px;flex:0 0 56px;font-size:1.7rem;border-radius:14px}.app-hero h1{font-size:1.45rem}.app-hero .sub{font-size:.88rem}.app-hero p.lead{font-size:.94rem}.tool{padding-top:20px}.tool .panel{padding:18px 16px}}
 </style>
@@ -99,7 +102,7 @@
         <h2 id="h1c" class="sr-only" style="position:absolute;left:-9999px"><span class="ja">換算</span><span class="en">Convert</span></h2>
         <div class="tabs2" id="tabs" role="group" aria-label="Category"></div>
         <div class="inrow">
-          <div class="field"><label for="val"><span class="ja">数字</span><span class="en">Amount</span></label><input type="text" id="val" inputmode="decimal" autocomplete="off"></div>
+          <div class="field"><label for="val"><span class="ja">数字</span><span class="en">Amount</span></label><input type="text" id="val" size="1" inputmode="decimal" autocomplete="off"></div>
           <div class="field"><label for="unit"><span class="ja">単位</span><span class="en">Unit</span></label><select id="unit"></select></div>
         </div>
         <p class="msg" id="msg" role="status" style="color:#a85f00;font-size:.88rem;min-height:1.2em"></p>
@@ -112,18 +115,18 @@
         <p class="note"><span class="ja">運転免許証や ID の申請では、身長を「5'-07&quot;」（5フィート7インチ）、体重をポンドで書きます。赤ちゃんの体重は「7 lb 8 oz」のようにポンドとオンスで言います。</span><span class="en">Driver's licenses and IDs list height as 5'-07&quot; (5 feet 7 inches) and weight in pounds. Babies' weights are given in pounds and ounces, like 7 lb 8 oz.</span></p>
         <div class="grid2">
           <div class="field" style="display:flex;flex-direction:column;gap:8px">
-            <label for="hCm"><span class="ja">身長（cm）</span><span class="en">Height (cm)</span></label><input type="text" id="hCm" inputmode="decimal" value="170" autocomplete="off">
-            <div class="inrow" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
-              <div class="field"><label for="hFt"><span class="ja">フィート</span><span class="en">feet</span></label><input type="text" id="hFt" inputmode="numeric" autocomplete="off"></div>
-              <div class="field"><label for="hIn"><span class="ja">インチ</span><span class="en">inches</span></label><input type="text" id="hIn" inputmode="decimal" autocomplete="off"></div>
+            <label for="hCm"><span class="ja">身長（cm）</span><span class="en">Height (cm)</span></label><input type="text" id="hCm" size="1" inputmode="decimal" value="170" autocomplete="off">
+            <div class="pair">
+              <div class="field"><label for="hFt"><span class="ja">フィート</span><span class="en">feet</span></label><input type="text" id="hFt" size="1" inputmode="numeric" autocomplete="off"></div>
+              <div class="field"><label for="hIn"><span class="ja">インチ</span><span class="en">inches</span></label><input type="text" id="hIn" size="1" inputmode="decimal" autocomplete="off"></div>
             </div>
             <div class="out" id="hOut" role="status"></div>
           </div>
           <div class="field" style="display:flex;flex-direction:column;gap:8px">
-            <label for="wKg"><span class="ja">体重（kg）</span><span class="en">Weight (kg)</span></label><input type="text" id="wKg" inputmode="decimal" value="65" autocomplete="off">
-            <div class="inrow" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
-              <div class="field"><label for="wLb"><span class="ja">ポンド</span><span class="en">pounds</span></label><input type="text" id="wLb" inputmode="numeric" autocomplete="off"></div>
-              <div class="field"><label for="wOz"><span class="ja">オンス</span><span class="en">ounces</span></label><input type="text" id="wOz" inputmode="decimal" autocomplete="off"></div>
+            <label for="wKg"><span class="ja">体重（kg）</span><span class="en">Weight (kg)</span></label><input type="text" id="wKg" size="1" inputmode="decimal" value="65" autocomplete="off">
+            <div class="pair">
+              <div class="field"><label for="wLb"><span class="ja">ポンド</span><span class="en">pounds</span></label><input type="text" id="wLb" size="1" inputmode="numeric" autocomplete="off"></div>
+              <div class="field"><label for="wOz"><span class="ja">オンス</span><span class="en">ounces</span></label><input type="text" id="wOz" size="1" inputmode="decimal" autocomplete="off"></div>
             </div>
             <div class="out" id="wOut" role="status"></div>
           </div>
