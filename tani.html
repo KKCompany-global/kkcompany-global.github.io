@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>アメリカ単位換算｜フィート・エーカー・ポンド・ガロンを日本の単位に（無料）</title>
 <meta name="description" content="身長を「5フィート7インチ」、体重をポンドで。フィート・ヤード・マイル、エーカー・平方フィート、オンス・ポンド、ガロン・カップ、mph、mpg、psi を、メートル・坪・グラム・リットルにまとめて換算。身近な例つきで感覚がつかめます。">
@@ -12,8 +13,8 @@
 <meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
 <style>
 .tool{padding:40px 0 72px}
 .tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px;align-items:start;margin-bottom:20px}
@@ -22,42 +23,42 @@
 .tool h2{font-size:1.15rem;font-weight:800}
 .tool label{font-weight:600;font-size:.9rem}
 .tool input[type=text]{min-width:0;font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
-.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #1A1534}
 .tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
 .tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
 .tool .eq{color:var(--muted);padding-bottom:12px}
 @media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
-.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#1A1534;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
 .tool .out b{font-weight:600;color:var(--brand)}
-.tool .out.err{background:#fff4e0}
+.tool .out.err{background:#241B0C}
 .tool .chips{display:flex;flex-wrap:wrap;gap:6px}
 .tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
 .tool .chip:hover{border-color:var(--brand-2)}
 .tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
 .tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
 .tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#110D22}
 .tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
 .tool td:first-child,.tool th:first-child{text-align:left}
 .tool td.name{font-weight:600;color:var(--brand)}
-.tool tr.hl td{background:#fff8eb}
-.tool tr.hit td{background:#e8efff}
+.tool tr.hl td{background:#241B0C}
+.tool tr.hit td{background:#1A1534}
 .tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
-.tool .frac div.q{background:#fff8eb}
+.tool .frac div.q{background:#241B0C}
 .tool .frac div span:last-child{color:var(--muted)}
 .tool .note{font-size:.8rem;color:var(--muted);text-align:left}
 .tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
 
 .tool .tabs2{display:flex;flex-wrap:wrap;gap:8px}
 .tool .tab2{font:inherit;font-size:.92rem;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 16px;cursor:pointer;min-height:40px}
-.tool .tab2[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.tool .tab2[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#0B0620}
 .tool .inrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,220px);gap:10px;align-items:end}
 @media (max-width:520px){.tool .inrow{grid-template-columns:1fr}}
 .tool .inrow select{font:inherit;font-size:1rem;min-height:48px;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;background:var(--surface);color:var(--text);width:100%}
 .tool .res{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .tool .res div{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
-.tool .res div.me{background:#eef3ff}
+.tool .res div.me{background:#1A1534}
 .tool .res b{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:1.05rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .tool .res span{font-size:.82rem;color:var(--muted);white-space:nowrap}
 .tool .out .feel{font-family:"Inter",sans-serif;font-size:1.5rem;font-weight:800;color:var(--brand)}
@@ -72,7 +73,7 @@
 <body class="lang-ja" data-title-ja="アメリカ単位換算｜フィート・エーカー・ポンド・ガロンを日本の単位に（無料）" data-title-en="US Units to Metric | Feet, acres, pounds and gallons, made familiar">
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <a href="index.html" class="logo"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#C9C3FF" stroke-width="1.5"><rect x="8" y="2" width="16" height="28" rx="4"/><path d="M14 25h4"/></svg>K&amp;K Company</a>
     <nav class="nav-links">
       <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
       <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
@@ -87,7 +88,7 @@
     <div class="wrap">
       <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
       <div class="head">
-        <div class="big-icon" style="background:#4338ca">⚖️</div>
+        <div class="big-icon" aria-hidden="true">ft</div>
         <div>
           <h1><span class="ja">アメリカ単位換算</span><span class="en">US Units to Metric</span></h1>
           <div class="sub"><span class="ja">フィート・エーカー・ポンド・ガロンを、なじみのある単位に</span><span class="en">Feet, acres, pounds and gallons in units you know</span></div>
@@ -105,7 +106,7 @@
           <div class="field"><label for="val"><span class="ja">数字</span><span class="en">Amount</span></label><input type="text" id="val" size="1" inputmode="decimal" autocomplete="off"></div>
           <div class="field"><label for="unit"><span class="ja">単位</span><span class="en">Unit</span></label><select id="unit"></select></div>
         </div>
-        <p class="msg" id="msg" role="status" style="color:#a85f00;font-size:.88rem;min-height:1.2em"></p>
+        <p class="msg" id="msg" role="status" style="color:#F0C15A;font-size:.88rem;min-height:1.2em"></p>
         <div class="res" id="res"></div>
         <ul class="ex" id="ex"></ul>
         <p class="note"><span class="ja">「米」はアメリカの単位です（イギリスのガロンやパイントは量が違います）。畳は 1.62 ㎡ で計算しています（地域によって 1.55〜1.82 ㎡ ほど差があります）。</span><span class="en">Volumes use US units (UK gallons and pints differ). Tatami uses 1.62 m², which varies by region.</span></p>

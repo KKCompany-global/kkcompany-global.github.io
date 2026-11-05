@@ -1,0 +1,112 @@
+/* K&K Company — top page (Ribbon design) */
+:root{
+  --bg:#000000; --surface:#0A0716; --line:#1E1A33; --line-2:#2E2850;
+  --text:#F2F0FF; --muted:#B9B5D6; --soft:#9E99C4; --accent:#C9C3FF;
+  --max:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Space Grotesk","Noto Sans JP",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:var(--text);text-decoration:none}
+a:hover{color:var(--accent)}
+.jp{font-family:"Noto Sans JP",system-ui,sans-serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* language */
+body.lang-ja .en{display:none!important}
+body.lang-en .ja{display:none!important}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.15rem}
+.nav-links{display:flex;gap:28px;align-items:center;font-family:"Noto Sans JP",sans-serif;font-size:.9rem}
+.lang-btn{min-height:44px;padding:0 18px;background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.25);border-radius:999px;font:inherit;font-size:.82rem;cursor:pointer}
+.lang-btn:hover{background:rgba(255,255,255,.16)}
+.menu-btn{display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:transparent;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:0;flex:none}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s}
+.menu-open .menu-btn span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-open .menu-btn span:nth-child(2){opacity:0}
+.menu-open .menu-btn span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mnav{border-top:1px solid var(--line);background:#05030C;padding:4px 24px 12px;display:flex;flex-direction:column}
+.mnav[hidden]{display:none}
+.mnav a{padding:14px 4px;border-bottom:1px solid var(--line);font-weight:600;font-family:"Noto Sans JP",sans-serif}
+.mnav a:last-child{border-bottom:none}
+@media (max-width:760px){.nav-links a{display:none}.menu-btn{display:flex}.nav-links{margin-left:auto}}
+@media (min-width:761px){.mnav{display:none!important}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;min-height:760px;display:flex;align-items:center}
+.ribbon{position:absolute;inset:0;width:100%;height:100%}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.86) 36%,rgba(0,0,0,0) 66%)}
+.hero-in{position:relative;width:100%;display:flex;flex-wrap:wrap;gap:64px;align-items:center;padding-top:112px;padding-bottom:128px}
+.hero-copy{flex:999 1 560px;min-width:0}
+.eyebrow{font-size:.8rem;color:var(--accent);margin-bottom:24px;letter-spacing:.04em}
+.hero h1{font-family:"Noto Sans JP",sans-serif;font-weight:900;font-size:clamp(2.4rem,5.4vw,4.5rem);line-height:1.15;letter-spacing:-.03em}
+.hero h1.en{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.035em}
+.hero p.lead{margin-top:32px;max-width:540px;font-size:1.06rem;line-height:1.9;color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 30px;border-radius:999px;font-weight:700;font-family:"Noto Sans JP",sans-serif}
+.btn-light{background:var(--text);color:#0B0620}
+.btn-light:hover{background:#fff;color:#0B0620}
+.btn-line{border:1px solid rgba(255,255,255,.3)}
+.btn-line:hover{border-color:var(--accent)}
+.phone{flex:1 1 300px;display:flex;justify-content:center}
+.phone-body{width:250px;height:510px;border:1.5px solid rgba(242,240,255,.85);border-radius:42px;padding:12px;background:rgba(8,4,24,.45)}
+.phone-screen{height:100%;border-radius:32px;border:1px solid rgba(201,195,255,.3);padding:44px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.ph-bar{height:9px;border-radius:5px;background:rgba(242,240,255,.25)}
+.ph-title{height:12px;width:55%;border-radius:6px;background:rgba(242,240,255,.5)}
+.ph-card{height:110px;border-radius:16px;background:rgba(201,195,255,.14);border:1px solid rgba(201,195,255,.35)}
+.ph-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px}
+.ph-grid div{height:64px;border-radius:12px;background:rgba(242,240,255,.08)}
+.ph-btn{margin-top:auto;height:44px;border-radius:999px;background:var(--text)}
+@media (max-width:760px){.phone{display:none}.hero{min-height:620px}.hero-in{padding-top:80px;padding-bottom:96px}}
+
+/* sections */
+section.block{border-top:1px solid var(--line);padding:104px 0}
+.label{font-size:.8rem;color:var(--accent);margin-bottom:16px;letter-spacing:.04em}
+h2.sec{font-family:"Noto Sans JP",sans-serif;font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:900;margin-bottom:24px}
+.sec-lead{color:var(--muted);margin:-8px 0 36px;font-family:"Noto Sans JP",sans-serif}
+.mission{max-width:860px;margin-bottom:56px;font-family:"Noto Sans JP",sans-serif;font-size:clamp(1.15rem,2.2vw,1.4rem);line-height:1.8;color:#D6D2F0}
+
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{border:1px solid #241F3D;border-radius:20px;padding:32px;background:var(--surface)}
+.card svg{display:block}
+.card h3{margin:24px 0 12px;font-family:"Noto Sans JP",sans-serif;font-size:1.35rem}
+.card p{color:var(--muted);font-size:.95rem;line-height:1.8;font-family:"Noto Sans JP",sans-serif}
+
+.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.app{display:flex;flex-direction:column;gap:12px;padding:24px;border:1px solid #241F3D;border-radius:20px;background:var(--surface);min-height:270px;transition:border-color .2s,transform .2s}
+.app:hover{border-color:#5A50B0;transform:translateY(-2px);color:var(--text)}
+.app-mark{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#4A3FC4,#B49AE0);color:#fff;font-size:.95rem;font-weight:500}
+.app h3{font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:1.15rem;line-height:1.4}
+.app .tag{color:var(--muted);font-size:.88rem;line-height:1.6;font-family:"Noto Sans JP",sans-serif}
+.app .more{margin-top:auto;font-size:.82rem;color:var(--soft);font-family:"Noto Sans JP",sans-serif}
+.app .status{display:inline-block;margin-right:10px;padding:2px 10px;border-radius:999px;border:1px solid #4A3E74;color:var(--accent)}
+
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.tool{display:flex;flex-direction:column;gap:6px;padding:20px 22px;border:1px solid var(--line-2);border-radius:16px;font-family:"Noto Sans JP",sans-serif}
+.tool:hover{border-color:#5A50B0;color:var(--text)}
+.tool b{font-size:1rem}
+.tool span{color:var(--muted);font-size:.85rem}
+
+@media (prefers-reduced-motion:reduce){.app{transition:none}.app:hover{transform:none}.menu-btn span{transition:none}}
+
+/* company table */
+.info{width:100%;border-collapse:collapse;border:1px solid #241F3D;border-radius:20px;overflow:hidden;background:var(--surface);font-family:"Noto Sans JP",sans-serif}
+.info th,.info td{text-align:left;padding:18px 24px;border-bottom:1px solid #241F3D;vertical-align:top;font-size:.95rem}
+.info tr:last-child th,.info tr:last-child td{border-bottom:none}
+.info th{width:180px;color:var(--soft);font-weight:500}
+@media (max-width:600px){.info th,.info td{display:block;width:100%}.info th{border-bottom:none;padding-bottom:2px}}
+
+/* contact */
+.contact{position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.contact .ribbon{opacity:.55}
+.contact-in{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;padding-top:104px;padding-bottom:104px}
+.contact h2{font-family:"Noto Sans JP",sans-serif;font-size:clamp(1.8rem,3.6vw,3rem);font-weight:900}
+.contact p{color:var(--muted);margin-top:12px;font-family:"Noto Sans JP",sans-serif}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--soft);font-size:.8rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}

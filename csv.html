@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CSV・Excel 行列入れ替え｜見出し行の指定・空行の削除も（無料）</title>
 <meta name="description" content="CSV・Excel の行と列を入れ替える無料ツール。見出し行の指定、空の行・列の削除、Shift_JIS の読み込み、複数シートの選択に対応。ブラウザの中だけで動き、ファイルはどこにも送りません。">
@@ -12,8 +13,8 @@
 <meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
 <style>
 .tool{padding:40px 0 72px}
 .tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px;align-items:start;margin-bottom:20px}
@@ -22,52 +23,52 @@
 .tool h2{font-size:1.15rem;font-weight:800}
 .tool label{font-weight:600;font-size:.9rem}
 .tool input[type=text]{min-width:0;font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
-.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #1A1534}
 .tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
 .tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
 .tool .eq{color:var(--muted);padding-bottom:12px}
 @media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
-.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#1A1534;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
 .tool .out b{font-weight:600;color:var(--brand)}
-.tool .out.err{background:#fff4e0}
+.tool .out.err{background:#241B0C}
 .tool .chips{display:flex;flex-wrap:wrap;gap:6px}
 .tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
 .tool .chip:hover{border-color:var(--brand-2)}
 .tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
 .tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
 .tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#110D22}
 .tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
 .tool td:first-child,.tool th:first-child{text-align:left}
 .tool td.name{font-weight:600;color:var(--brand)}
-.tool tr.hl td{background:#fff8eb}
-.tool tr.hit td{background:#e8efff}
+.tool tr.hl td{background:#241B0C}
+.tool tr.hit td{background:#1A1534}
 .tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
-.tool .frac div.q{background:#fff8eb}
+.tool .frac div.q{background:#241B0C}
 .tool .frac div span:last-child{color:var(--muted)}
 .tool .note{font-size:.8rem;color:var(--muted);text-align:left}
 .tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
 
 .tool .drop{border:2px dashed var(--line);border-radius:var(--radius);padding:22px;text-align:center;color:var(--muted);background:var(--bg);display:flex;flex-direction:column;gap:10px;align-items:center}
-.tool .drop.on{border-color:var(--brand-2);background:#eef3ff}
+.tool .drop.on{border-color:var(--brand-2);background:#1A1534}
 .tool .btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .tool .tbtn{font:inherit;font-size:.9rem;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:42px}
 .tool .tbtn:hover{border-color:var(--brand-2)}
-.tool .tbtn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.tool .tbtn.pri{background:var(--brand);border-color:var(--brand);color:#0B0620}
 .tool .tbtn.pri:hover{background:var(--brand-2)}
-.tool .tbtn[aria-pressed="true"]{background:#eef3ff;border-color:var(--brand-2);color:var(--brand)}
+.tool .tbtn[aria-pressed="true"]{background:#1A1534;border-color:var(--brand-2);color:var(--brand)}
 .tool select{font:inherit;font-size:.9rem;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px;min-height:42px;background:var(--surface);color:var(--text)}
 .tool textarea{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;width:100%;min-height:90px;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;color:var(--text);background:var(--surface)}
 .tool .opts{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.9rem}
 .tool .opts label{font-weight:500;display:inline-flex;gap:6px;align-items:center}
-.tool .sheet th.xh,.tool .sheet td.xh{background:#f0f2f6;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:.75rem;text-align:center;min-width:36px}
-.tool .sheet tr.hd td:not(.xh){background:#eef3ff;font-weight:600;color:var(--brand)}
+.tool .sheet th.xh,.tool .sheet td.xh{background:#110D22;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:.75rem;text-align:center;min-width:36px}
+.tool .sheet tr.hd td:not(.xh){background:#1A1534;font-weight:600;color:var(--brand)}
 .tool .sheet td{text-align:left;max-width:220px;overflow:hidden;text-overflow:ellipsis;font-size:.82rem}
 .tool .sheet .tw{max-height:420px}
 .tool .sum{font-size:.88rem;color:var(--muted)}
 .tool [hidden]{display:none!important}
-.tool .msg{font-size:.88rem;color:#a85f00;min-height:1.2em}
+.tool .msg{font-size:.88rem;color:#F0C15A;min-height:1.2em}
 @media (max-width:600px){.app-hero{padding:32px 0 24px}.crumb{margin-bottom:14px}.app-hero .head{gap:14px;margin-bottom:14px}.app-hero .big-icon{width:56px;height:56px;flex:0 0 56px;font-size:1.7rem;border-radius:14px}.app-hero h1{font-size:1.45rem}.app-hero .sub{font-size:.88rem}.app-hero p.lead{font-size:.94rem}.tool{padding-top:20px}.tool .panel{padding:18px 16px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSV・Excel 行列入れ替え","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"CSV・Excel の行と列を入れ替える無料ツール。見出し行の指定、空の行・列の削除、Shift_JIS の読み込み、複数シートの選択に対応。ブラウザの中だけで動き、ファイルはどこにも送りません。","publisher":{"@type":"Organization","name":"K&K Company"}}</script>
@@ -75,7 +76,7 @@
 <body class="lang-ja" data-title-ja="CSV・Excel 行列入れ替え｜見出し行の指定・空行の削除も（無料）" data-title-en="CSV & Excel Transpose | Swap rows and columns online, free">
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <a href="index.html" class="logo"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#C9C3FF" stroke-width="1.5"><rect x="8" y="2" width="16" height="28" rx="4"/><path d="M14 25h4"/></svg>K&amp;K Company</a>
     <nav class="nav-links">
       <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
       <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
@@ -90,7 +91,7 @@
     <div class="wrap">
       <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
       <div class="head">
-        <div class="big-icon" style="background:#166534">⇄</div>
+        <div class="big-icon" aria-hidden="true">⇄</div>
         <div>
           <h1><span class="ja">CSV・Excel 行列入れ替え</span><span class="en">CSV &amp; Excel Transpose</span></h1>
           <div class="sub"><span class="ja">行と列を入れ替えて、Excel にそのまま戻せます</span><span class="en">Swap rows and columns, then take it straight back to Excel</span></div>

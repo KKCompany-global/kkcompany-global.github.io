@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>K&amp;K Company</title>
 <meta name="description" content="合同会社 K&K カンパニー — 世の中にありそうでない、人々の需要を満たすアプリを日本から世界へ。">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
-  <meta property="og:title" content="K&amp;K Company｜K&amp;K カンパニー">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="home.css?v=1">
+<meta property="og:title" content="K&amp;K Company｜K&amp;K カンパニー">
 <meta property="og:description" content="世の中にありそうでない、人々の需要を満たすアプリを日本から世界へ。">
 <meta property="og:url" content="https://kkcompany-global.github.io/">
 <meta property="og:type" content="website">
@@ -21,7 +22,9 @@
 
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <a href="#top" class="logo">
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C9C3FF" stroke-width="1.5"><rect x="8" y="2" width="16" height="28" rx="4"/><path d="M14 25h4"/></svg>
+      K&amp;K Company</a>
     <nav class="nav-links">
       <a href="#about"><span class="ja">理念</span><span class="en">Mission</span></a>
       <a href="#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
@@ -35,232 +38,151 @@
 
 <main id="top">
   <!-- HERO -->
-  <div class="hero">
-    <div class="wrap">
-      <span class="eyebrow"><span class="ja">日本から、世界へ。</span><span class="en">From Japan, to the world.</span></span>
-      <h1 class="ja">世の中に<span class="hl">ありそうでない</span>、<br>必要とされるアプリを。</h1>
-      <h1 class="en">Apps the world <span class="hl">didn't know</span><br>it was missing.</h1>
-      <p class="ja">合同会社 K&amp;K カンパニーは、スマートフォン向けアプリの設計・開発を行い、日本を拠点に世界市場へ届けます。人々の不安を取り除き、豊かな生活をサポートするアプリをつくり続けます。</p>
-      <p class="en">K&amp;K Company designs and develops smartphone apps in Japan for users around the world. We build tools that remove everyday worries and support a richer life.</p>
-      <div class="cta">
-        <a href="#apps" class="btn btn-primary"><span class="ja">アプリを見る</span><span class="en">See our apps</span></a>
-        <a href="#contact" class="btn btn-ghost"><span class="ja">お問い合わせ</span><span class="en">Contact us</span></a>
+  <section class="hero">
+    <svg class="ribbon" aria-hidden="true" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="rbA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0B0620"/><stop offset=".45" stop-color="#3B2D8F"/><stop offset=".75" stop-color="#8E84F0"/><stop offset="1" stop-color="#E3B6E8"/></linearGradient>
+        <linearGradient id="rbB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E2A5E"/><stop offset=".4" stop-color="#B49AE0"/><stop offset=".8" stop-color="#4A3FC4"/><stop offset="1" stop-color="#090418"/></linearGradient>
+        <linearGradient id="rbEdge" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7B70FF" stop-opacity="0"/><stop offset=".6" stop-color="#C9C3FF"/><stop offset="1" stop-color="#FFC6F0"/></linearGradient>
+        <filter id="rbSoft"><feGaussianBlur stdDeviation="2"/></filter>
+      </defs>
+      <path d="M1440 -40 C1180 60 1000 140 900 300 C800 460 820 620 1010 860 L760 860 C640 640 660 430 780 270 C900 110 1120 20 1440 -120 Z" fill="url(#rbB)" opacity=".9"/>
+      <path d="M560 860 C700 640 900 470 1120 330 C1260 240 1360 160 1440 60 L1440 230 C1330 330 1220 400 1100 480 C920 600 820 720 760 860 Z" fill="url(#rbA)"/>
+      <path d="M560 860 C700 640 900 470 1120 330 C1260 240 1360 160 1440 60" fill="none" stroke="url(#rbEdge)" stroke-width="2" filter="url(#rbSoft)"/>
+      <path d="M480 860 C640 650 860 480 1090 340 C1250 240 1360 150 1440 40" fill="none" stroke="#8E84F0" stroke-opacity=".35" stroke-width="1"/>
+    </svg>
+    <div class="hero-shade"></div>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="eyebrow mono">FROM JAPAN, TO THE WORLD</p>
+        <h1 class="ja">世の中に<br>ありそうでない、<br>必要とされるアプリを。</h1>
+        <h1 class="en">Apps the world<br>didn't know<br>it was missing.</h1>
+        <p class="lead ja">合同会社 K&amp;K カンパニーは、スマートフォン向けアプリの設計・開発を行い、日本を拠点に世界市場へ届けます。人々の不安を取り除き、豊かな生活をサポートするアプリをつくり続けます。</p>
+        <p class="lead en">K&amp;K Company designs and develops smartphone apps in Japan for users around the world. We build tools that remove everyday worries and support a richer life.</p>
+        <div class="cta">
+          <a href="#apps" class="btn btn-light"><span class="ja">アプリを見る</span><span class="en">See our apps</span></a>
+          <a href="#contact" class="btn btn-line"><span class="ja">お問い合わせ</span><span class="en">Contact us</span></a>
+        </div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="phone-body"><div class="phone-screen">
+          <div class="ph-title"></div><div class="ph-card"></div>
+          <div class="ph-bar" style="width:85%"></div><div class="ph-bar" style="width:70%"></div>
+          <div class="ph-grid"><div></div><div></div></div>
+          <div class="ph-btn"></div>
+        </div></div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- MISSION -->
-  <section id="about">
+  <section class="block" id="about">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Mission</span>
-        <h2 class="ja">経営理念</h2><h2 class="en">Our Mission</h2>
-      </div>
-      <div class="quote">
-        <span class="ja">世の中にありそうでない、人々の需要を満たすアプリの創造と開発。<br>人々の不安を取り除き、豊かな生活をサポートする。</span>
-        <span class="en">To create apps that meet real needs nobody has quite met yet — removing people's worries and supporting a richer life.</span>
-      </div>
-      <div class="philo">
+      <p class="label mono">01 — MISSION</p>
+      <h2 class="sec"><span class="ja">経営理念</span><span class="en">Our Mission</span></h2>
+      <p class="mission"><span class="ja">世の中にありそうでない、人々の需要を満たすアプリの創造と開発。人々の不安を取り除き、豊かな生活をサポートする。</span><span class="en">To create apps that meet real needs nobody has quite met yet — removing people's worries and supporting a richer life.</span></p>
+      <div class="grid3">
         <div class="card">
-          <div class="icon">💡</div>
-          <h3 class="ja">ありそうでない発想</h3><h3 class="en">Unmet needs</h3>
-          <p class="ja">「こんなアプリがあれば」という日常の小さな困りごとから出発します。</p>
-          <p class="en">We start from small everyday frustrations: "I wish there were an app for this."</p>
+          <svg aria-hidden="true" width="72" height="72" viewBox="0 0 72 72" fill="none" stroke="#C9C3FF" stroke-width="1.5"><path d="M24 52V38a12 12 0 1 1 24 0v14z"/><path d="M30 52v8h12v-8"/><path d="M36 6v8M14 16l5 5M58 16l-5 5" stroke="#FFC6F0"/></svg>
+          <h3><span class="ja">ありそうでない発想</span><span class="en">Unmet needs</span></h3>
+          <p><span class="ja">「こんなアプリがあれば」という日常の小さな困りごとから出発します。</span><span class="en">We start from small everyday frustrations: "I wish there were an app for this."</span></p>
         </div>
         <div class="card">
-          <div class="icon">🤝</div>
-          <h3 class="ja">不安を取り除く</h3><h3 class="en">Peace of mind</h3>
-          <p class="ja">誰でも迷わず使える、シンプルでわかりやすい操作を大切にしています。</p>
-          <p class="en">Simple, clear designs that anyone can use without confusion.</p>
+          <svg aria-hidden="true" width="72" height="72" viewBox="0 0 72 72" fill="none" stroke="#C9C3FF" stroke-width="1.5"><rect x="22" y="8" width="28" height="56" rx="6"/><path d="M29 36l6 6 10-12" stroke="#FFC6F0"/></svg>
+          <h3><span class="ja">不安を取り除く</span><span class="en">Peace of mind</span></h3>
+          <p><span class="ja">誰でも迷わず使える、シンプルでわかりやすい操作を大切にしています。</span><span class="en">Simple, clear designs that anyone can use without confusion.</span></p>
         </div>
         <div class="card">
-          <div class="icon">🌏</div>
-          <h3 class="ja">世界市場へ</h3><h3 class="en">Built for the world</h3>
-          <p class="ja">日本を拠点に、国や言語の壁を越えて使われるアプリを届けます。</p>
-          <p class="en">Based in Japan, made for users across languages and borders.</p>
+          <svg aria-hidden="true" width="72" height="72" viewBox="0 0 72 72" fill="none" stroke="#C9C3FF" stroke-width="1.5"><circle cx="36" cy="38" r="24"/><ellipse cx="36" cy="38" rx="10" ry="24"/><path d="M12 38h48"/><path d="M50 16l14-8" stroke="#FFC6F0"/></svg>
+          <h3><span class="ja">世界市場へ</span><span class="en">Built for the world</span></h3>
+          <p><span class="ja">日本を拠点に、国や言語の壁を越えて使われるアプリを届けます。</span><span class="en">Based in Japan, made for users across languages and borders.</span></p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- APPS -->
-  <section id="apps">
+  <section class="block" id="apps">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Apps</span>
-        <h2 class="ja">アプリ</h2><h2 class="en">Our Apps</h2>
-      </div>
+      <p class="label mono">02 — APPS</p>
+      <h2 class="sec"><span class="ja">アプリ</span><span class="en">Our Apps</span></h2>
       <div class="apps">
         <a class="app" href="notans.html">
-          <div class="app-icon" style="background:#1f3a8a">🗂️</div>
-          <div>
-            <h3>ノータンスアプローチ2027</h3>
-            <span class="tag ja">業務データベース／フォーム作成</span><span class="tag en">Business database &amp; form builder</span>
-            <p class="ja">台帳・伝票・印刷物を、ドラッグ操作で自由に設計できるデータベースアプリ。Excel 連携や EDI 取り込みにも対応予定です。</p>
-            <p class="en">Design ledgers, forms and printouts by drag-and-drop. Excel integration and EDI import are planned.</p>
-            <span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="more"><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
-          </div>
+          <span class="app-mark mono" aria-hidden="true">NA</span>
+          <h3>ノータンスアプローチ2027</h3>
+          <span class="tag"><span class="ja">台帳・伝票・印刷物をドラッグ操作で設計できる業務データベース</span><span class="en">Design ledgers, forms and printouts by drag-and-drop</span></span>
+          <span class="more"><span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
         </a>
         <a class="app" href="yomeru.html">
-          <div class="app-icon" style="background:#0f766e">📮</div>
-          <div>
-            <h3>Yomeru AI</h3>
-            <span class="tag ja">届いた書類をやさしく解説</span><span class="tag en">Understand the letters you receive</span>
-            <p class="ja">日本で暮らす外国人の方などに向けて、届いた書類や手紙を撮影するだけで内容とやるべきことを解説します。</p>
-            <p class="en">Snap a photo of an official letter and get a plain explanation of what it says and what to do next.</p>
-            <span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="more"><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
-          </div>
+          <span class="app-mark mono" aria-hidden="true">Yo</span>
+          <h3>Yomeru AI</h3>
+          <span class="tag"><span class="ja">届いた書類や手紙を撮影するだけで、内容とやるべきことを解説</span><span class="en">Snap an official letter and get a plain explanation of what to do next</span></span>
+          <span class="more"><span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
         </a>
         <a class="app" href="fishscale-pro.html">
-          <div class="app-icon" style="background:#0369a1">🎣</div>
-          <div>
-            <h3>FishScale Pro</h3>
-            <span class="tag ja">釣った魚をカメラで計測</span><span class="tag en">Measure your catch with your camera</span>
-            <p class="ja">スマホのカメラで魚の全長を測って記録。ルアー記録や、仲間うちの釣り大会機能も備えます。</p>
-            <p class="en">Measure and log your fish with your phone camera, plus lure logs and private tournaments.</p>
-            <span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="more"><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
-          </div>
+          <span class="app-mark mono" aria-hidden="true">FS</span>
+          <h3>FishScale Pro</h3>
+          <span class="tag"><span class="ja">スマホのカメラで魚の全長を測って記録。仲間うちの釣り大会機能も</span><span class="en">Measure and log your catch with your camera, plus private tournaments</span></span>
+          <span class="more"><span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
         </a>
         <a class="app" href="valutapro.html">
-          <div class="app-icon" style="background:#b45309;position:relative;overflow:hidden">💱<img src="valutapro/icon.png" alt="ValutaPro" width="56" height="56" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:inherit" onerror="this.remove()"></div>
-          <div>
-            <h3>ValutaPro</h3>
-            <span class="tag ja">旅行のための通貨換算</span><span class="tag en">Currency converter for travelers</span>
-            <p class="ja">旅先での買い物や支払いの金額を、すばやく自国通貨に換算できます。</p>
-            <p class="en">Quickly convert prices into your home currency while you travel.</p>
-            <span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="more"><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
-          </div>
+          <span class="app-mark mono" aria-hidden="true">VP</span>
+          <h3>ValutaPro</h3>
+          <span class="tag"><span class="ja">旅先での買い物や支払いの金額を、すばやく自国通貨に換算</span><span class="en">Quickly convert prices into your home currency while you travel</span></span>
+          <span class="more"><span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
         </a>
         <a class="app" href="privacy-vault.html">
-          <div class="app-icon" style="background:#7c3aed">🛡️</div>
-          <div>
-            <h3>Privacy Vault</h3>
-            <span class="tag ja">個人情報の漏えいを見守る</span><span class="tag en">Keep track of data breaches</span>
-            <p class="ja">自分の個人情報がどこで漏えいしたかを把握し、次にとるべき対策を整理します。</p>
-            <p class="en">See where your personal data has been exposed and what to do about it.</p>
-            <span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="more"><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
-          </div>
+          <span class="app-mark mono" aria-hidden="true">PV</span>
+          <h3>Privacy Vault</h3>
+          <span class="tag"><span class="ja">個人情報がどこで漏えいしたかを把握し、次の対策を整理</span><span class="en">See where your personal data has been exposed and what to do about it</span></span>
+          <span class="more"><span class="status"><span class="ja">開発中</span><span class="en">In development</span></span><span class="ja">詳しく見る →</span><span class="en">Learn more →</span></span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- FREE TOOLS -->
-  <section id="tools">
+  <section class="block" id="tools">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Free tools</span>
-        <h2 class="ja">無料ツール</h2><h2 class="en">Free Tools</h2>
-      </div>
-      <p class="ja" style="color:var(--muted);margin-bottom:24px">現場で使うちょっとした道具を、無料で置いています。登録不要で、ブラウザの中だけで動きます。</p>
-      <p class="en" style="color:var(--muted);margin-bottom:24px">Small, free tools for everyday work. No sign-up, and they run only in your browser.</p>
-      <div class="apps">
-        <a class="app" href="takeout.html">
-          <div class="app-icon" style="background:#0e7490">📅</div>
-          <div>
-            <h3 class="ja">Google フォト書き出しの日付直し</h3><h3 class="en">Google Photos Takeout Date Fixer</h3>
-            <span class="tag"><span class="ja">Takeout の撮影日を写真に戻す</span><span class="en">Put the taken dates back on exported photos</span></span>
-            <p class="ja">Google データエクスポートで日付がばらばらになった写真を、撮影日に戻して年・月のフォルダに整理します。</p>
-            <p class="en">Fix the scrambled dates on photos exported with Google Takeout and sort them into year and month folders.</p>
-            <span class="status" style="background:#e8f5ee;color:#1d6b45"><span class="ja">無料で使える</span><span class="en">Free to use</span></span><span class="more"><span class="ja">使ってみる →</span><span class="en">Open the tool →</span></span>
-          </div>
-        </a>
-        <a class="app" href="daijoubu.html">
-          <div class="app-icon" style="background:#9a3412">？</div>
-          <div>
-            <h3 class="ja">これやって大丈夫？</h3><h3 class="en">Is it safe to do this?</h3>
-            <span class="tag"><span class="ja">圧縮・アーカイブ・最適化は元に戻せるか</span><span class="en">Which space-saving actions can be undone</span></span>
-            <p class="ja">iPhone・Google フォト・Windows・Mac で容量を空ける操作が、元に戻せるかどうかの早見表です。</p>
-            <p class="en">A quick guide to which storage-saving actions on iPhone, Google Photos, Windows and Mac can be undone.</p>
-            <span class="status" style="background:#e8f5ee;color:#1d6b45"><span class="ja">読み物</span><span class="en">Guide</span></span><span class="more"><span class="ja">見てみる →</span><span class="en">Read the guide →</span></span>
-          </div>
-        </a>
-        <a class="app" href="csv.html">
-          <div class="app-icon" style="background:#166534">⇄</div>
-          <div>
-            <h3 class="ja">CSV・Excel 行列入れ替え</h3><h3 class="en">CSV &amp; Excel Transpose</h3>
-            <span class="tag"><span class="ja">行と列の入れ替え・見出し行の指定・空行の削除</span><span class="en">Swap rows and columns, pick the header, drop empty rows</span></span>
-            <p class="ja">項目名が縦に並んだ表を横向きに直して、Excel にそのまま戻せます。Shift_JIS や複数シートにも対応。</p>
-            <p class="en">Turn a sideways table the right way round and take it straight back to Excel. Handles Shift_JIS and multi-sheet workbooks.</p>
-            <span class="status" style="background:#e8f5ee;color:#1d6b45"><span class="ja">無料で使える</span><span class="en">Free to use</span></span><span class="more"><span class="ja">使ってみる →</span><span class="en">Open the tool →</span></span>
-          </div>
-        </a>
-        <a class="app" href="neji.html">
-          <div class="app-icon" style="background:#334155">📏</div>
-          <div>
-            <h3 class="ja">インチ・ねじ早見帳</h3><h3 class="en">Inch &amp; Thread Pocket Guide</h3>
-            <span class="tag"><span class="ja">インチ⇄ミリ換算・ねじの早見表</span><span class="en">Inch–mm converter and thread charts</span></span>
-            <p class="ja">分数インチとミリ・センチの換算、メートルねじ・ユニファイねじ（UNC・UNF）のピッチと下穴径の目安。</p>
-            <p class="en">Convert fractional inches to mm and cm, and look up pitch and tap drill sizes for metric and Unified (UNC/UNF) threads.</p>
-            <span class="status" style="background:#e8f5ee;color:#1d6b45"><span class="ja">無料で使える</span><span class="en">Free to use</span></span><span class="more"><span class="ja">使ってみる →</span><span class="en">Open the tool →</span></span>
-          </div>
-        </a>
-        <a class="app" href="tani.html">
-          <div class="app-icon" style="background:#4338ca">⚖️</div>
-          <div>
-            <h3 class="ja">アメリカ単位換算</h3><h3 class="en">US Units to Metric</h3>
-            <span class="tag"><span class="ja">フィート・エーカー・ポンド・ガロンなど</span><span class="en">Feet, acres, pounds, gallons and more</span></span>
-            <p class="ja">身長（5フィート7インチ）・体重（ポンド）の書き方から、長さ・広さ・重さ・量・速さ・燃費・空気圧まで、メートル・坪・グラム・リットルにまとめて換算。身近な例つき。</p>
-            <p class="en">Length, area, weight, volume, speed, fuel economy and pressure in metric and Japanese units, with everyday examples.</p>
-            <span class="status" style="background:#e8f5ee;color:#1d6b45"><span class="ja">無料で使える</span><span class="en">Free to use</span></span><span class="more"><span class="ja">使ってみる →</span><span class="en">Open the tool →</span></span>
-          </div>
-        </a>
-        <a class="app" href="ondo.html">
-          <div class="app-icon" style="background:#b91c1c">🌡️</div>
-          <div>
-            <h3 class="ja">華氏・摂氏換算</h3><h3 class="en">Fahrenheit ⇄ Celsius</h3>
-            <span class="tag"><span class="ja">°F と °C をすぐ変換</span><span class="en">Instant °F ⇄ °C</span></span>
-            <p class="ja">アメリカの天気・体温・オーブンの温度を摂氏に。早見表つき。</p>
-            <p class="en">US weather, body and oven temperatures in Celsius, with quick charts.</p>
-            <span class="status" style="background:#e8f5ee;color:#1d6b45"><span class="ja">無料で使える</span><span class="en">Free to use</span></span><span class="more"><span class="ja">使ってみる →</span><span class="en">Open the tool →</span></span>
-          </div>
-        </a>
+      <p class="label mono">03 — FREE TOOLS</p>
+      <h2 class="sec"><span class="ja">無料ツール</span><span class="en">Free Tools</span></h2>
+      <p class="sec-lead"><span class="ja">登録不要で、ブラウザの中だけで動く小さな道具です。</span><span class="en">Small, free tools. No sign-up, and they run only in your browser.</span></p>
+      <div class="tools">
+        <a class="tool" href="takeout.html"><b><span class="ja">Google フォト書き出しの日付直し</span><span class="en">Google Photos Takeout Date Fixer</span></b><span><span class="ja">Takeout の撮影日を写真に戻す</span><span class="en">Put the taken dates back on exported photos</span></span></a>
+        <a class="tool" href="daijoubu.html"><b><span class="ja">これやって大丈夫？</span><span class="en">Is it safe to do this?</span></b><span><span class="ja">容量を空ける操作が元に戻せるかの早見表</span><span class="en">Which space-saving actions can be undone</span></span></a>
+        <a class="tool" href="csv.html"><b><span class="ja">CSV・Excel 行列入れ替え</span><span class="en">CSV &amp; Excel Transpose</span></b><span><span class="ja">行と列の入れ替え・見出し行の指定・空行の削除</span><span class="en">Swap rows and columns, pick the header, drop empty rows</span></span></a>
+        <a class="tool" href="neji.html"><b><span class="ja">インチ・ねじ早見帳</span><span class="en">Inch &amp; Thread Pocket Guide</span></b><span><span class="ja">インチ⇄ミリ換算・ねじの早見表</span><span class="en">Inch–mm converter and thread charts</span></span></a>
+        <a class="tool" href="tani.html"><b><span class="ja">アメリカ単位換算</span><span class="en">US Units to Metric</span></b><span><span class="ja">フィート・エーカー・ポンド・ガロンなど</span><span class="en">Feet, acres, pounds, gallons and more</span></span></a>
+        <a class="tool" href="ondo.html"><b><span class="ja">華氏・摂氏換算</span><span class="en">Fahrenheit ⇄ Celsius</span></b><span><span class="ja">°F と °C をすぐ変換</span><span class="en">Instant °F ⇄ °C</span></span></a>
       </div>
     </div>
   </section>
 
   <!-- COMPANY -->
-  <section id="company">
+  <section class="block" id="company">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Company</span>
-        <h2 class="ja">会社概要</h2><h2 class="en">Company Profile</h2>
-      </div>
+      <p class="label mono">04 — COMPANY</p>
+      <h2 class="sec"><span class="ja">会社概要</span><span class="en">Company Profile</span></h2>
       <table class="info">
-        <tr>
-          <th><span class="ja">会社名</span><span class="en">Name</span></th>
-          <td><span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">K&amp;K Company LLC (合同会社)</span></td>
-        </tr>
-        <tr>
-          <th><span class="ja">事業内容</span><span class="en">Business</span></th>
-          <td><span class="ja">スマートフォン向けアプリの設計、開発、およびグローバル展開</span><span class="en">Design, development and global distribution of smartphone apps</span></td>
-        </tr>
-        <tr>
-          <th><span class="ja">拠点</span><span class="en">Base</span></th>
-          <td><span class="ja">日本（世界市場をターゲットに展開）</span><span class="en">Japan (serving markets worldwide)</span></td>
-        </tr>
-        <tr>
-          <th><span class="ja">所在地</span><span class="en">Address</span></th>
-          <td><span class="ja">設立準備中</span><span class="en">To be announced</span></td>
-        </tr>
-        <tr>
-          <th><span class="ja">設立</span><span class="en">Founded</span></th>
-          <td><span class="ja">設立準備中</span><span class="en">In preparation</span></td>
-        </tr>
+        <tr><th><span class="ja">会社名</span><span class="en">Name</span></th><td><span class="ja">合同会社 K&amp;K カンパニー</span><span class="en">K&amp;K Company LLC (合同会社)</span></td></tr>
+        <tr><th><span class="ja">事業内容</span><span class="en">Business</span></th><td><span class="ja">スマートフォン向けアプリの設計、開発、およびグローバル展開</span><span class="en">Design, development and global distribution of smartphone apps</span></td></tr>
+        <tr><th><span class="ja">拠点</span><span class="en">Base</span></th><td><span class="ja">日本（世界市場をターゲットに展開）</span><span class="en">Japan (serving markets worldwide)</span></td></tr>
+        <tr><th><span class="ja">所在地</span><span class="en">Address</span></th><td><span class="ja">設立準備中</span><span class="en">To be announced</span></td></tr>
+        <tr><th><span class="ja">設立</span><span class="en">Founded</span></th><td><span class="ja">設立準備中</span><span class="en">In preparation</span></td></tr>
       </table>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact">
-        <h2 class="ja">お問い合わせ</h2><h2 class="en">Get in touch</h2>
-        <p class="ja">アプリに関するご質問・ご要望、取材や協業のご相談はお気軽にどうぞ。</p>
-        <p class="en">Questions about our apps, feedback, press or partnership inquiries are welcome.</p>
-        
-        <a class="btn" href="mailto:kkcompany.global@gmail.com">kkcompany.global@gmail.com</a>
+  <section class="contact" id="contact">
+    <svg class="ribbon" aria-hidden="true" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice"><path d="M-40 420 C300 300 700 260 1000 180 C1200 130 1340 60 1480 -20 L1480 90 C1320 190 1160 250 980 290 C700 350 360 380 120 420 Z" fill="url(#rbA)"/></svg>
+    <div class="wrap contact-in">
+      <div>
+        <p class="label mono">05 — CONTACT</p>
+        <h2><span class="ja">次のアプリを、一緒に。</span><span class="en">Let's build what's next.</span></h2>
+        <p><span class="ja">アプリに関するご質問・ご要望、取材や協業のご相談はお気軽にどうぞ。</span><span class="en">Questions, feedback, press or partnership inquiries are welcome.</span></p>
       </div>
+      <a class="btn btn-light" href="mailto:kkcompany.global@gmail.com">kkcompany.global@gmail.com</a>
     </div>
   </section>
 </main>

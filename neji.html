@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>インチ・ねじ早見帳｜インチ⇄ミリ換算・ねじの下穴早見表（無料）</title>
 <meta name="description" content="インチとミリ・センチの換算（分数対応）、メートルねじ・ユニファイねじ（UNC・UNF）の早見表と下穴径の目安。登録不要・無料で、ブラウザだけで使えます。">
@@ -12,8 +13,8 @@
 <meta property="og:image" content="https://kkcompany-global.github.io/ogp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
 <style>
 .tool{padding:40px 0 72px}
 .tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px;align-items:start;margin-bottom:20px}
@@ -22,29 +23,29 @@
 .tool h2{font-size:1.15rem;font-weight:800}
 .tool label{font-weight:600;font-size:.9rem}
 .tool input[type=text]{min-width:0;font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:1.2rem;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;min-height:48px}
-.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #e8efff}
+.tool input[type=text]:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #1A1534}
 .tool .conv{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
 .tool .field{display:flex;flex-direction:column;gap:4px;min-width:0}
 .tool .eq{color:var(--muted);padding-bottom:12px}
 @media (max-width:520px){.tool .conv{grid-template-columns:1fr}.tool .eq{display:none}}
-.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#eef3ff;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
+.tool .out{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;background:#1A1534;border-radius:10px;padding:10px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:2px;min-height:44px}
 .tool .out b{font-weight:600;color:var(--brand)}
-.tool .out.err{background:#fff4e0}
+.tool .out.err{background:#241B0C}
 .tool .chips{display:flex;flex-wrap:wrap;gap:6px}
 .tool .chip{font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:3px 10px;cursor:pointer;min-height:30px}
 .tool .chip:hover{border-color:var(--brand-2)}
 .tool .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
 .tool table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
 .tool th,.tool td{padding:6px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#fafbfd}
+.tool th{font-weight:600;font-size:.78rem;color:var(--muted);background:#110D22}
 .tool td{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
 .tool td:first-child,.tool th:first-child{text-align:left}
 .tool td.name{font-weight:600;color:var(--brand)}
-.tool tr.hl td{background:#fff8eb}
-.tool tr.hit td{background:#e8efff}
+.tool tr.hl td{background:#241B0C}
+.tool tr.hit td{background:#1A1534}
 .tool .frac{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .tool .frac div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
-.tool .frac div.q{background:#fff8eb}
+.tool .frac div.q{background:#241B0C}
 .tool .frac div span:last-child{color:var(--muted)}
 .tool .note{font-size:.8rem;color:var(--muted);text-align:left}
 .tool .rel{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:.92rem;color:var(--muted)}
@@ -55,7 +56,7 @@
 <body class="lang-ja" data-title-ja="インチ・ねじ早見帳｜インチ⇄ミリ換算・ねじの下穴早見表（無料）" data-title-en="Inch & Thread Pocket Guide | Free inch–mm converter and thread charts">
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo"><span class="logo-mark">K&amp;K</span>K&amp;K Company</a>
+    <a href="index.html" class="logo"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#C9C3FF" stroke-width="1.5"><rect x="8" y="2" width="16" height="28" rx="4"/><path d="M14 25h4"/></svg>K&amp;K Company</a>
     <nav class="nav-links">
       <a href="index.html#about"><span class="ja">理念</span><span class="en">Mission</span></a>
       <a href="index.html#apps"><span class="ja">アプリ</span><span class="en">Apps</span></a>
@@ -70,7 +71,7 @@
     <div class="wrap">
       <a class="crumb" href="index.html#tools">← <span class="ja">無料ツール一覧へ</span><span class="en">All free tools</span></a>
       <div class="head">
-        <div class="big-icon" style="background:#334155">📏</div>
+        <div class="big-icon" aria-hidden="true">in</div>
         <div>
           <h1><span class="ja">インチ・ねじ早見帳</span><span class="en">Inch &amp; Thread Pocket Guide</span></h1>
           <div class="sub"><span class="ja">インチ⇄ミリ換算・ねじの早見表</span><span class="en">Inch–mm converter and thread charts</span></div>
